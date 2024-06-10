@@ -8,15 +8,17 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    //MARK: - Dependencies
+    let fontSize: CGFloat = 20
     
     // MARK: - UI Properties
-    
     private lazy var startButton: UIButton = {
         let element = UIButton(type: .system)
         element.setTitle("START", for: .normal)
         element.setTitleColor(UIColor(named: "titleColorButton"), for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .heavy)
         element.setBackgroundImage(UIImage(named: "button"), for: .normal)
+        element.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -25,8 +27,9 @@ final class MainViewController: UIViewController {
         let element = UIButton(type: .system)
         element.setTitle("RESULTS", for: .normal)
         element.setTitleColor(UIColor(named: "titleColorButton"), for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: .heavy)
         element.setBackgroundImage(UIImage(named: "button"), for: .normal)
+        element.addTarget(self, action: #selector(resultsButtonTapped), for: .touchUpInside)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -35,15 +38,16 @@ final class MainViewController: UIViewController {
         let element = UIButton(type: .system)
         element.setBackgroundImage(UIImage(systemName: "gearshape.fill"), for: .normal)
         element.tintColor = .black
+        element.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
-    
     
     private lazy var rulesButton: UIButton = {
         let element = UIButton(type: .system)
         element.setBackgroundImage(UIImage(systemName: "questionmark.circle.fill"), for: .normal)
         element.tintColor = .black
+        element.addTarget(self, action: #selector(rulesButtonTapped), for: .touchUpInside)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -51,6 +55,7 @@ final class MainViewController: UIViewController {
     private lazy var handsImageView: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "hands")
+        element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -58,14 +63,11 @@ final class MainViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         setupConstraints()
-        
     }
-    
+
     // MARK: - Private Methods
-    
     private func setupUI() {
         view.backgroundColor = UIColor(named: "backgroundColor")
         
@@ -73,20 +75,31 @@ final class MainViewController: UIViewController {
         view.addSubview(rulesButton)
         view.addSubview(startButton)
         view.addSubview(resultsButton)
-        
         view.addSubview(handsImageView)
+    }
     
+    // MARK: - Selector methods
+    @objc private func startButtonTapped() {
+        print("startButtonTapped")
+    }
+    
+    @objc private func resultsButtonTapped() {
+        print("resultsButtonTapped")
+    }
+    
+    @objc private func settingsButtonTapped() {
+        print("settingsButtonTapped")
+    }
+    
+    @objc private func rulesButtonTapped() {
+        print("rulesButtonTapped")
     }
 }
 
-
     // MARK: - Setup Constraints
-
-extension MainViewController {
-    
-    private func setupConstraints() {
+private extension MainViewController {
+     func setupConstraints() {
         NSLayoutConstraint.activate([
-           
             startButton.bottomAnchor.constraint(equalTo: resultsButton.topAnchor, constant: -10),
             startButton.heightAnchor.constraint(equalToConstant: 60),
             startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
@@ -106,13 +119,10 @@ extension MainViewController {
             rulesButton.widthAnchor.constraint(equalToConstant: 40),
             rulesButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             rulesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            
-            handsImageView.heightAnchor.constraint(equalToConstant: 360),
-            handsImageView.widthAnchor.constraint(equalToConstant: 430),
+
+            handsImageView.widthAnchor.constraint(equalToConstant: view.frame.width),
             handsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             handsImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-    
         ])
     }
 }
