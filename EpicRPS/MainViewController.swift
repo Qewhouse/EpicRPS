@@ -10,6 +10,8 @@ import UIKit
 final class MainViewController: UIViewController {
     //MARK: - Dependencies
     let fontSize: CGFloat = 20
+    let offset: CGFloat = 60
+    let smallButtonSize: CGFloat = 40
     
     // MARK: - UI Properties
     private lazy var startButton: UIButton = {
@@ -101,26 +103,27 @@ private extension MainViewController {
      func setupConstraints() {
         NSLayoutConstraint.activate([
             startButton.bottomAnchor.constraint(equalTo: resultsButton.topAnchor, constant: -10),
-            startButton.heightAnchor.constraint(equalToConstant: 60),
-            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
+            startButton.widthAnchor.constraint(equalToConstant: view.frame.width / 1.8),
+            startButton.heightAnchor.constraint(equalToConstant: offset),
+            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            resultsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
-            resultsButton.heightAnchor.constraint(equalToConstant: 60),
-            resultsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            resultsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
+            resultsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            resultsButton.heightAnchor.constraint(equalToConstant: offset),
+            resultsButton.widthAnchor.constraint(equalToConstant: view.frame.width / 1.8),
+            resultsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            settingsButton.heightAnchor.constraint(equalToConstant: 40),
-            settingsButton.widthAnchor.constraint(equalToConstant: 40),
+            settingsButton.heightAnchor.constraint(equalToConstant: smallButtonSize),
+            settingsButton.widthAnchor.constraint(equalToConstant: smallButtonSize),
             settingsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            settingsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            settingsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
-            rulesButton.heightAnchor.constraint(equalToConstant: 40),
-            rulesButton.widthAnchor.constraint(equalToConstant: 40),
+            rulesButton.heightAnchor.constraint(equalToConstant: smallButtonSize),
+            rulesButton.widthAnchor.constraint(equalToConstant: smallButtonSize),
             rulesButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            rulesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            rulesButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
             handsImageView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            handsImageView.heightAnchor.constraint(equalToConstant: view.frame.width),
             handsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             handsImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
