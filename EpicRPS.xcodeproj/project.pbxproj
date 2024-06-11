@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B527A662C1830BD00583A18 /* Pre-fightScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B527A652C1830BD00583A18 /* Pre-fightScreenController.swift */; };
 		375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF272C16127E00A8A6D0 /* AppDelegate.swift */; };
 		375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */; };
 		375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B527A652C1830BD00583A18 /* Pre-fightScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pre-fightScreenController.swift"; sourceTree = "<group>"; };
+		0B527A6A2C18904D00583A18 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
 		375DFF242C16127E00A8A6D0 /* EpicRPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicRPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375DFF272C16127E00A8A6D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +38,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B527A672C18903500583A18 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				0B527A6A2C18904D00583A18 /* Rubik.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		375DFF1B2C16127E00A8A6D0 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +65,7 @@
 		375DFF262C16127E00A8A6D0 /* EpicRPS */ = {
 			isa = PBXGroup;
 			children = (
+				0B527A672C18903500583A18 /* Font */,
 				375DFF3B2C1613EA00A8A6D0 /* App */,
 				375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */,
 				37637C992C161A4500B6B06E /* Resources */,
@@ -64,6 +76,7 @@
 		375DFF3B2C1613EA00A8A6D0 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0B527A652C1830BD00583A18 /* Pre-fightScreenController.swift */,
 				375DFF272C16127E00A8A6D0 /* AppDelegate.swift */,
 				375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */,
 				375DFF352C16128000A8A6D0 /* Info.plist */,
@@ -152,6 +165,7 @@
 			files = (
 				375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */,
 				375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */,
+				0B527A662C1830BD00583A18 /* Pre-fightScreenController.swift in Sources */,
 				375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
