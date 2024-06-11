@@ -7,39 +7,60 @@
 
 import UIKit
 
-class RulesView: UIView {
+final class RulesView: UIView {
     
+    // MARK: - UI Properties
+    private lazy var rule1: UIView = {
+        createRuleLabel(text: "Игра проводится между игроком и компьютером.", number: 1)
+    }()
+    
+    private lazy var rule2: UIView = {
+        createGestureRuleLabel()
+    }()
+    
+    private lazy var rule3: UIView = {
+        createRuleLabel(text: "У игрока есть 30 сек. для выбора жеста.", number: 3)
+    }()
+    
+    private lazy var rule4: UIView = {
+        createRuleLabel(text: "Игра ведётся до трёх побед одного из участников.", number: 4)
+    }()
+    
+    private lazy var rule5: UIView = {
+        createRuleLabel(text: "За каждую победу игрок получает 500 баллов, которые можно посмотреть на доске лидеров.", number: 5, highlight: "500 баллов")
+    }()
+    
+    // Вертикальный стек для всех правил
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [rule1, rule2, rule3, rule4, rule5])
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    // MARK: - Initializers
     // Инициализация представления
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        setupConstraints()
     }
     
+    // Инициализация из storyboard (не используется)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
     // Настройка пользовательского интерфейса
-    func setupUI() {
-        backgroundColor = .white // Установка фона
-        
-        // Создание и настройка всех правил
-        let rule1 = createRuleLabel(text: "Игра проводится между игроком и компьютером.", number: 1)
-        let rule2 = createGestureRuleLabel()
-        let rule3 = createRuleLabel(text: "У игрока есть 30 сек. для выбора жеста.", number: 3)
-        let rule4 = createRuleLabel(text: "Игра ведётся до трёх побед одного из участников.", number: 4)
-        let rule5 = createRuleLabel(text: "За каждую победу игрок получает 500 баллов, которые можно посмотреть на доске лидеров.", number: 5, highlight: "500 баллов")
-        
-        // Создание вертикального стека для всех правил
-        let stackView = UIStackView(arrangedSubviews: [rule1, rule2, rule3, rule4, rule5])
-        stackView.axis = .vertical // Установка оси стека на вертикальную
-        stackView.spacing = 16 // Установка расстояния между элементами
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Добавление стека на основное представление
+    private func setupUI() {
+        backgroundColor = .white
         addSubview(stackView)
-        
-        // Настройка констрейнтов для стека
+    }
+    
+    // Настройка констрейнтов
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -47,9 +68,10 @@ class RulesView: UIView {
         ])
     }
     
+    // MARK: - Helper Methods
     // Функция создания общего правила
     private func createRuleLabel(text: String, number: Int, highlight: String? = nil) -> UIView {
-        let container = UIView() // Контейнер для правила
+        let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         
         // Создание и настройка метки с номером
