@@ -8,7 +8,6 @@
 import UIKit
 
 final class RulesView: UIView {
-    
     // MARK: - UI Properties
     private lazy var rule1: UIView = {
         createRuleLabel(text: "Игра проводится между игроком и компьютером.", number: 1)
@@ -47,7 +46,6 @@ final class RulesView: UIView {
         setupConstraints()
     }
     
-    // Инициализация из storyboard (не используется)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -165,11 +163,9 @@ final class RulesView: UIView {
         mainStackView.alignment = .center
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Добавление стеков в контейнер
         container.addSubview(mainStackView)
         container.addSubview(gestureStackView)
         
-        // Настройка констрейнтов для стеков в контейнере
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: container.topAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
@@ -211,10 +207,8 @@ final class RulesView: UIView {
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Добавление стека в контейнер
         container.addSubview(stackView)
         
-        // Настройка констрейнтов для стека в контейнере
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: container.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
