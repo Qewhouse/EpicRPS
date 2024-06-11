@@ -23,6 +23,9 @@ final class FightViewController: UIViewController {
         static let buttonSize: CGFloat = 80
         static let buttonBottomMargin: CGFloat = 57
         static let paperButtonBottomMargin: CGFloat = 125
+        static let pauseViewButtonWight: CGFloat = 200
+        static let pauseViewButtonHeight: CGFloat = 200
+        
     }
     
     private enum VariantHand: String, CaseIterable {
@@ -50,6 +53,22 @@ final class FightViewController: UIViewController {
     private let femaleHandImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let fightImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "fight")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let drowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "draw")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -86,7 +105,6 @@ final class FightViewController: UIViewController {
     private let scissorsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "Scissors"), for: .normal)
-        button.setImage(UIImage(named: "Scissors_chosen"), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
@@ -115,10 +133,11 @@ final class FightViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startTimer()
+        startTimerAndHideFight()
     }
 }
 
+//MARK: - Private methods
 private extension FightViewController {
     // MARK: - Setup Methods
     func initialize() {
@@ -127,16 +146,10 @@ private extension FightViewController {
         setupConstraints()
         setBackground(imageName: "fight background")
         loadRoundTime()
+        configureButton()
         configureNavigationBar()
-        battleProgressView.trackColor = .cyan
-        battleProgressView.progressColor = .orange
-        timerlProgressView.progressColor = .green
-        timerlProgressView.trackColor = .darkGray
-        battleProgressView.progress = 0.5
-        
-        rockButton.addTarget(self, action: #selector(rockButtonTapped), for: .touchUpInside)
-        paperButton.addTarget(self, action: #selector(paperButtonTapped), for: .touchUpInside)
-        scissorsButton.addTarget(self, action: #selector(scissorsButtonTapped), for: .touchUpInside)
+        resetHands()
+        configureProgressView()
     }
     
     func setupView() {
@@ -148,8 +161,9 @@ private extension FightViewController {
         view.addSubview(rockButton)
         view.addSubview(paperButton)
         view.addSubview(scissorsButton)
+        view.addSubview(drowImageView)
+        view.addSubview(fightImageView)
         view.addSubview(pauseView)
-        resetHands()
     }
     
     func cofigurePauseView() {
@@ -157,7 +171,6 @@ private extension FightViewController {
             guard let self = self else { return }
             switch action {
             case .play:
-                
                 self.hidePauseView()
             case .restart:
                 break
@@ -177,12 +190,34 @@ private extension FightViewController {
         backgroundImage.image = UIImage(named: imageName)
         backgroundImage.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImage, at: 0) // Вставляем изображение на задний план
+        drowImageView.isHidden = true
     }
     
     func loadRoundTime() {
         roundTimeLabel.text = "0:\(Constants.roundTime)"
     }
     
+    func configureButton() {
+        rockButton.addTarget(self, action: #selector(rockButtonTapped), for: .touchUpInside)
+        paperButton.addTarget(self, action: #selector(paperButtonTapped), for: .touchUpInside)
+        scissorsButton.addTarget(self, action: #selector(scissorsButtonTapped), for: .touchUpInside)
+    }
+    
+    func configureProgressView() {
+        battleProgressView.trackColor = .cyan
+        battleProgressView.progressColor = .orange
+        timerlProgressView.progressColor = .green
+        timerlProgressView.trackColor = .darkGray
+        battleProgressView.progress = 0.5
+    }
+    
+    func startTimerAndHideFight() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.fightImageView.isHidden = true
+            self.startTimer()
+        }
+    }
     
     
     // MARK: - Timer Methods
@@ -218,6 +253,13 @@ private extension FightViewController {
         roundTimeLabel.text = String(format: "%2d:%02d", minutes, seconds)
     }
     
+    func showDrow() {
+        drowImageView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.drowImageView.isHidden = true
+        }
+    }
+    
     // MARK: - Game Logic
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
@@ -231,7 +273,9 @@ private extension FightViewController {
     }
     
     private func determineWinner(playerChoice: VariantHand, computerChoice: VariantHand) {
-        guard playerChoice != computerChoice else { return }
+        guard playerChoice != computerChoice else {
+            showDrow()
+            return }
         // It's a tie, do nothing
         if (playerChoice == .rock && computerChoice == .scissors) ||
             (playerChoice == .scissors && computerChoice == .paper) ||
@@ -422,8 +466,22 @@ private extension FightViewController {
         NSLayoutConstraint.activate([
             pauseView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pauseView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            pauseView.widthAnchor.constraint(equalToConstant: 200),
-            pauseView.heightAnchor.constraint(equalToConstant: 200)
+            pauseView.widthAnchor.constraint(equalToConstant: Constants.pauseViewButtonWight),
+            pauseView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight)
+        ])
+        
+        NSLayoutConstraint.activate([
+            drowImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            drowImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            drowImageView.widthAnchor.constraint(equalToConstant: Constants.pauseViewButtonWight),
+            drowImageView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight)
+        ])
+        
+        NSLayoutConstraint.activate([
+            fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fightImageView.widthAnchor.constraint(equalToConstant: Constants.pauseViewButtonWight),
+            fightImageView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight)
         ])
     }
     

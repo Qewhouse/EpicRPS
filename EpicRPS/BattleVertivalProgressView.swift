@@ -52,20 +52,20 @@ final class BattleVerticalProgressView: VerticalProgressView {
             // Constraints for topPersonImageView
             topPersonImageView.topAnchor.constraint(equalTo: topAnchor),
             topPersonImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            topPersonImageView.widthAnchor.constraint(equalToConstant: 30), // Установите ширину изображения по вашему выбору
-            topPersonImageView.heightAnchor.constraint(equalToConstant: 30), // Установите высоту изображения по вашему выбору
+            topPersonImageView.widthAnchor.constraint(equalToConstant: 30),
+            topPersonImageView.heightAnchor.constraint(equalToConstant: 30),
             
             // Constraints for bottomPersonImageView
             bottomPersonImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomPersonImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            bottomPersonImageView.widthAnchor.constraint(equalToConstant: 30), // Установите ширину изображения по вашему выбору
-            bottomPersonImageView.heightAnchor.constraint(equalToConstant: 30), // Установите высоту изображения по вашему выбору
+            bottomPersonImageView.widthAnchor.constraint(equalToConstant: 30),
+            bottomPersonImageView.heightAnchor.constraint(equalToConstant: 30),
             
             // Constraints for centerLineView
             centerLineView.centerYAnchor.constraint(equalTo: centerYAnchor),
             centerLineView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            centerLineView.widthAnchor.constraint(equalToConstant: 15), // Установите ширину линии по вашему выбору
-            centerLineView.heightAnchor.constraint(equalToConstant: 2) // Установите высоту линии
+            centerLineView.widthAnchor.constraint(equalToConstant: 15),
+            centerLineView.heightAnchor.constraint(equalToConstant: 2)
         ])
     }
 }

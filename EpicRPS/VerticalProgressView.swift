@@ -8,11 +8,9 @@
 import UIKit
 
 // MARK: - VerticalProgressView
-
 class VerticalProgressView: UIView {
     
     // MARK: - Private Properties
-    
     private let progressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +19,6 @@ class VerticalProgressView: UIView {
     }()
     
     // MARK: - Initializers
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -33,7 +30,6 @@ class VerticalProgressView: UIView {
     }
     
     // MARK: - Public Properties
-    
     public var progress: Float {
         get {
             return progressView.progress
@@ -62,13 +58,11 @@ class VerticalProgressView: UIView {
     }
     
     // MARK: - Public Methods
-    
     public func setProgress(_ progress: Float, animated: Bool = true) {
         progressView.setProgress(progress, animated: animated)
     }
     
     // MARK: - Private Methods
-    
     private  func setupViews() {
         addSubview(progressView)
         layoutForProgressView()
