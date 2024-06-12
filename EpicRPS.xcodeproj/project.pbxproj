@@ -13,7 +13,6 @@
 		375DFF312C16128000A8A6D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 375DFF302C16128000A8A6D0 /* Assets.xcassets */; };
 		375DFF342C16128000A8A6D0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 375DFF332C16128000A8A6D0 /* Base */; };
 		37F16A402C19ED9100CC2C1A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */; };
-		37F16A412C19ED9100CC2C1A /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F16A3F2C19ED9100CC2C1A /* RulesView.swift */; };
 		6E1117772C179532003CC000 /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1117762C179532003CC000 /* FightViewController.swift */; };
 		6E1117792C179C1D003CC000 /* VerticalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1117782C179C1D003CC000 /* VerticalProgressView.swift */; };
 		6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */; };
@@ -30,7 +29,6 @@
 		375DFF332C16128000A8A6D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		375DFF352C16128000A8A6D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
-		37F16A3F2C19ED9100CC2C1A /* RulesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		6E1117762C179532003CC000 /* FightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightViewController.swift; sourceTree = "<group>"; };
 		6E1117782C179C1D003CC000 /* VerticalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalProgressView.swift; sourceTree = "<group>"; };
 		6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSettings.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 		37F16A422C19ED9700CC2C1A /* RulesModule */ = {
 			isa = PBXGroup;
 			children = (
-				37F16A3F2C19ED9100CC2C1A /* RulesView.swift */,
 				37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */,
 			);
 			path = RulesModule;
@@ -201,7 +198,6 @@
 				6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */,
 				37F16A402C19ED9100CC2C1A /* RulesViewController.swift in Sources */,
 				6E11177D2C17AF0F003CC000 /* BattleVertivalProgressView.swift in Sources */,
-				37F16A412C19ED9100CC2C1A /* RulesView.swift in Sources */,
 				375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */,
 				6E1117792C179C1D003CC000 /* VerticalProgressView.swift in Sources */,
 				6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */,
