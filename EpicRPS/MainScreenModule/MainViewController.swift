@@ -83,6 +83,7 @@ final class MainViewController: UIViewController {
     // MARK: - Selector methods
     @objc private func startButtonTapped() {
         print("startButtonTapped")
+        navigationController?.pushViewController(FightViewController(), animated: true)
     }
     
     @objc private func resultsButtonTapped() {
@@ -95,6 +96,7 @@ final class MainViewController: UIViewController {
     
     @objc private func rulesButtonTapped() {
         print("rulesButtonTapped")
+        navigationController?.pushViewController(RulesViewController(), animated: true)
     }
 }
 
