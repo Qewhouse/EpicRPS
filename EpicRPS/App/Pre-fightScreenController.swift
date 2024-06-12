@@ -8,7 +8,7 @@
 import UIKit
 
 class Pre_fightScreen: UIViewController {
-       
+    
     // MARK: - UI Properties
     private lazy var player1: UIImageView = {
         let element = UIImageView()
@@ -80,9 +80,9 @@ class Pre_fightScreen: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundGradient()
         setupUI()
         setupConstraints()
+        setBackground(imageName: "background")
     }
     
     // MARK: - Private Methods
@@ -96,19 +96,13 @@ class Pre_fightScreen: UIViewController {
     }
 }
 
-    // MARK: - Setup Constraints
+// MARK: - Setup Constraints
 extension Pre_fightScreen{
-    private func backgroundGradient() {
-        let backgroundColour1 = UIColor(named: "backgroundPurple")!.cgColor
-        let backgroundColour2 = UIColor(red: 101/255, green: 109/255, blue: 244/255, alpha: 1).cgColor
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.type = .radial
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [backgroundColour1, backgroundColour2]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    func setBackground(imageName: String) {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "background")
+        backgroundImage.contentMode = .scaleAspectFill
+        view.insertSubview(backgroundImage, at: 0)
     }
     
     private func setupConstraints() {
@@ -121,7 +115,7 @@ extension Pre_fightScreen{
             
             player1.bottomAnchor.constraint(equalTo: player1Stat.topAnchor, constant: -9),
             player1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
+            
             player2.topAnchor.constraint(equalTo: vsLabel.bottomAnchor, constant: 61),
             player2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
@@ -134,6 +128,6 @@ extension Pre_fightScreen{
             player2Stat.widthAnchor.constraint(equalToConstant: 128),
             player2Stat.topAnchor.constraint(equalTo: player2.bottomAnchor, constant: 10),
             player2Stat.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-])
+        ])
     }
 }
