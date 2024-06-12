@@ -83,7 +83,7 @@ final class MainViewController: UIViewController {
     // MARK: - Selector methods
     @objc private func startButtonTapped() {
         print("startButtonTapped")
-        navigationController?.pushViewController(FightViewController(), animated: true)
+        navigationController?.pushViewController(Pre_fightScreen(), animated: true)
     }
     
     @objc private func resultsButtonTapped() {
