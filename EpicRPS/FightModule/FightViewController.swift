@@ -291,8 +291,12 @@ private extension FightViewController {
     
     func showDrow() {
         drowImageView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.drowImageView.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.drowImageView.isHidden = true
+            self?.resetHands()
+            self?.timer?.invalidate()
+            self?.startTimer()
+            self?.selectedButton(nil)
         }
     }
     
@@ -303,17 +307,16 @@ private extension FightViewController {
         timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
-        
-        determineWinner(playerChoice: choice, computerChoice: computerChoice)
-        
-        animateHands()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self ] in
+            self?.determineWinner(playerChoice: choice, computerChoice: computerChoice)
+        }
     }
     
     private func determineWinner(playerChoice: VariantHand, computerChoice: VariantHand) {
         guard playerChoice != computerChoice else {
             showDrow()
             return }
-        
+        animateHands()
         if (playerChoice == .rock && computerChoice == .scissors) ||
             (playerChoice == .scissors && computerChoice == .paper) ||
             (playerChoice == .paper && computerChoice == .rock) {
@@ -343,7 +346,7 @@ private extension FightViewController {
     func endGame() {
         timer?.invalidate()
         timer = nil
-        
+
         let winner = playerScore > computerScore ? "Player" : "Computer"
         let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
