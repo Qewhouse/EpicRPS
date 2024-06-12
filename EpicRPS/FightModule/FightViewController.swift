@@ -242,13 +242,11 @@ private extension FightViewController {
     }
     
     func startTimerAndHideFight() {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.fightImageView.isHidden = true
             self.startTimer()
         }
     }
-    
     
     // MARK: - Timer Methods
     func startTimer() {

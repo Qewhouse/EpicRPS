@@ -94,6 +94,7 @@ class Pre_fightScreen: UIViewController {
         view.addSubview(getReadyLabel)
         view.addSubview(player1Stat)
         view.addSubview(player2Stat)
+        self.navigationItem.hidesBackButton = true
     }
     
     //MARK: - Private Selector Methods
