@@ -83,6 +83,14 @@ final class FightViewController: UIViewController {
         return imageView
     }()
     
+    private let bloodImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "blood")
+        return imageView
+    }()
+    
     private let timerlProgressView = VerticalProgressView()
     private let battleProgressView = BattleVerticalProgressView()
     
@@ -180,10 +188,12 @@ private extension FightViewController {
         resetHands()
         configureProgressView()
         updateScoreLabel()
+        bloodImageView.isHidden = true
     }
     
     func setupView() {
         view.addSubview(femaleHandImageView)
+        view.addSubview(bloodImageView)
         view.addSubview(maleHandImageView)
         view.addSubview(timerlProgressView)
         view.addSubview(battleProgressView)
@@ -205,7 +215,7 @@ private extension FightViewController {
             case .play:
                 self.hidePauseView()
             case .restart:
-                break
+                self.resetGame()
             case .goToHome:
                 break
             }
@@ -293,10 +303,7 @@ private extension FightViewController {
         drowImageView.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.drowImageView.isHidden = true
-            self?.resetHands()
-            self?.timer?.invalidate()
-            self?.startTimer()
-            self?.selectedButton(nil)
+            self?.nextRound()
         }
     }
     
@@ -366,23 +373,27 @@ private extension FightViewController {
     func animateHands() {
         let originalMaleTopConstraint = maleHandTopConstraint.constant
         let originalFemaleBottomConstraint = femaleHandBottomConstraint.constant
-        
+
         maleHandTopConstraint.constant = Constants.maleHandToCenterOffset
         femaleHandBottomConstraint.constant = Constants.femaleHandToCenterOffset
-        
+
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         }) { _ in
-            self.maleHandTopConstraint.constant = originalMaleTopConstraint
-            self.femaleHandBottomConstraint.constant = originalFemaleBottomConstraint
             
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            }) { _ in
-                self.resetHands()
-                self.timer?.invalidate()
-                self.startTimer()
-                self.selectedButton(nil)
+            self.bloodImageView.isHidden = false
+            self.bloodImageView.alpha = 1.0
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.maleHandTopConstraint.constant = originalMaleTopConstraint
+                    self.femaleHandBottomConstraint.constant = originalFemaleBottomConstraint
+                    self.view.layoutIfNeeded()
+                    self.bloodImageView.alpha = 0.0
+                }) { _ in
+                    self.bloodImageView.isHidden = true
+                    self.nextRound()
+                }
             }
         }
     }
@@ -395,6 +406,13 @@ private extension FightViewController {
     func updateScoreLabel() {
         femaleScoreLabel.text = String(computerScore)
         maleScoreLabel.text = String(playerScore)
+    }
+    
+    func nextRound() {
+        self.resetHands()
+        self.timer?.invalidate()
+        self.startTimer()
+        self.selectedButton(nil)
     }
     
     // MARK: - Button Actions
@@ -544,7 +562,12 @@ private extension FightViewController {
             fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fightImageView.widthAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeWight),
-            fightImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight)
+            fightImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight),
+            
+            bloodImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bloodImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bloodImageView.widthAnchor.constraint(equalToConstant: 250),
+            bloodImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
     }
 }
