@@ -149,6 +149,7 @@ final class FightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        DefaultsSettings.roundTime = 30
         roundTime = DefaultsSettings.roundTime ?? Constants.roundTime
     }
     
@@ -292,7 +293,7 @@ private extension FightViewController {
     // MARK: - Game Logic
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
-        
+        timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
         
