@@ -208,7 +208,6 @@ private extension FightViewController {
         pauseView.alpha = 0
     }
     
-    
     func setBackground(imageName: String) {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: imageName)
@@ -462,102 +461,51 @@ private extension FightViewController {
             timerlProgressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             timerlProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             timerlProgressView.heightAnchor.constraint(equalToConstant: Constants.timerProgressViewHeight),
-            timerlProgressView.widthAnchor.constraint(equalToConstant: Constants.timerProgressViewWeght)
-        ])
-        
-        NSLayoutConstraint.activate([
+            timerlProgressView.widthAnchor.constraint(equalToConstant: Constants.timerProgressViewWeght),
+
             battleProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             battleProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             battleProgressView.heightAnchor.constraint(equalToConstant: Constants.battleProgressViewHeight),
-            battleProgressView.widthAnchor.constraint(equalToConstant: Constants.battleProgressViewWight)
-        ])
-        
-        NSLayoutConstraint.activate([
+            battleProgressView.widthAnchor.constraint(equalToConstant: Constants.battleProgressViewWight),
+
             roundTimeLabel.centerXAnchor.constraint(equalTo: timerlProgressView.centerXAnchor),
-            roundTimeLabel.topAnchor.constraint(equalTo: timerlProgressView.bottomAnchor, constant: 10)
-        ])
-        
-        NSLayoutConstraint.activate([
+            roundTimeLabel.topAnchor.constraint(equalTo: timerlProgressView.bottomAnchor, constant: 10),
+
             maleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
-            maleScoreLabel.topAnchor.constraint(equalTo: battleProgressView.bottomAnchor, constant: 10)
-        ])
-        
-        NSLayoutConstraint.activate([
+            maleScoreLabel.topAnchor.constraint(equalTo: battleProgressView.bottomAnchor, constant: 10),
+
             femaleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
-            femaleScoreLabel.bottomAnchor.constraint(equalTo: battleProgressView.topAnchor, constant: -10)
-        ])
-        
-        NSLayoutConstraint.activate([
+            femaleScoreLabel.bottomAnchor.constraint(equalTo: battleProgressView.topAnchor, constant: -10),
+
             rockButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.buttonBottomMargin),
             rockButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             rockButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
-            rockButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize)
-        ])
-        
-        NSLayoutConstraint.activate([
+            rockButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
+
             paperButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             paperButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.paperButtonBottomMargin),
             paperButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
-            paperButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize)
-        ])
-        
-        NSLayoutConstraint.activate([
+            paperButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
+
             scissorsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
-            scissorsButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize)
-        ])
-        
-        NSLayoutConstraint.activate([
+            scissorsButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
+
             pauseView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pauseView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             pauseView.widthAnchor.constraint(equalToConstant: Constants.pauseViewButtonWight),
-            pauseView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight)
-        ])
-        
-        NSLayoutConstraint.activate([
+            pauseView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight),
+
             drowImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             drowImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             drowImageView.widthAnchor.constraint(equalToConstant:  Constants.fightDrawImageViewSizeWight),
-            drowImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight)
-        ])
-        
-        NSLayoutConstraint.activate([
+            drowImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight),
+
             fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fightImageView.widthAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeWight),
             fightImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight)
         ])
-    }
-    
-}
-
-
-import SwiftUI
-
-
-
-struct FightViewControllerRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> FightViewController {
-        return FightViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: FightViewController, context: Context) {
-        
-    }
-}
-
-
-struct FightViewControllerPreview: View {
-    var body: some View {
-        FightViewControllerRepresentable()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-
-
-struct FightViewControllerPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        FightViewControllerPreview()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DegfaultsSetiings.swift
+//  DefaultsSettings.swift
 //  EpicRPS
 //
 //  Created by Станислав Артамонов on 11.06.24.
