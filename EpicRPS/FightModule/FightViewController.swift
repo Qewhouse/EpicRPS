@@ -39,12 +39,17 @@ final class FightViewController: UIViewController {
         case scissors = "Scissors"
         
         static func random() -> VariantHand {
-            return VariantHand.allCases.randomElement()!
+            VariantHand.allCases.randomElement()!
         }
         
         func imageName(for player: String) -> String {
-            return "\(player) hand \(self.rawValue.lowercased())"
+            "\(player) hand \(self.rawValue.lowercased())"
         }
+        
+        func imageNameChoisenButton() -> String {
+            self.rawValue + "_chosen"
+        }
+        
     }
     
     // MARK: - Private Layout
@@ -106,16 +111,17 @@ final class FightViewController: UIViewController {
     }()
     
     private let rockButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Rock"), for: .normal)
         button.setImage(UIImage(named: "Rock_chosen"), for: .highlighted)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
     }()
     
     private let paperButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Paper"), for: .normal)
         button.setImage(UIImage(named: "Paper_chosen"), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -124,8 +130,9 @@ final class FightViewController: UIViewController {
     }()
     
     private let scissorsButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Scissors"), for: .normal)
+        button.setImage(UIImage(named: "Scissors_chosen")?.withRenderingMode(.alwaysOriginal), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
@@ -264,6 +271,7 @@ private extension FightViewController {
             computerScore += 1
             updateScore()
             startTimer()
+            updateScoreLabel()
             
             if playerScore >= 3 || computerScore >= 3 {
                 endGame()
@@ -291,6 +299,7 @@ private extension FightViewController {
     // MARK: - Game Logic
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
+        selectedButton(choice)
         timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
@@ -370,6 +379,7 @@ private extension FightViewController {
                 self.resetHands()
                 self.timer?.invalidate()
                 self.startTimer()
+                self.selectedButton(nil)
             }
         }
     }
@@ -400,6 +410,33 @@ private extension FightViewController {
     @objc func pauseButtonTapped() {
         showPauseView()
     }
+    
+    private func selectedButton(_ with: VariantHand?) {
+        guard let with = with else {
+            setupBaseImageButton()
+            return
+        }
+        [rockButton, paperButton, scissorsButton].forEach() { $0.isUserInteractionEnabled = false }
+        
+        switch with {
+        case .rock:
+            rockButton.setImage(UIImage(named: VariantHand.rock.imageNameChoisenButton()), for: .normal)
+        case .paper:
+            paperButton.setImage(UIImage(named: VariantHand.paper.imageNameChoisenButton()), for: .normal)
+        case .scissors:
+            scissorsButton.setImage(UIImage(named: VariantHand.scissors.imageNameChoisenButton()), for: .normal)
+        default:
+           break
+        }
+    }
+    
+    func setupBaseImageButton() {
+        [rockButton, paperButton, scissorsButton].forEach() { $0.isUserInteractionEnabled = true }
+        rockButton.setImage(UIImage(named: VariantHand.rock.rawValue), for: .normal)
+        paperButton.setImage(UIImage(named: VariantHand.paper.rawValue), for: .normal)
+        scissorsButton.setImage(UIImage(named: VariantHand.scissors.rawValue), for: .normal)
+    }
+    
     // MARK: - Configure NavigationBar
     func configureNavigationBar() {
         self.navigationItem.rightBarButtonItem = configureBarButtonItem()
