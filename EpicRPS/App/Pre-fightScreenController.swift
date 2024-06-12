@@ -10,7 +10,7 @@ import UIKit
 class Pre_fightScreen: UIViewController {
     
     // MARK: - UI Properties
-    private lazy var player1: UIImageView = {
+    private lazy var player1Image: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "Player 1")
         element.contentMode = .scaleAspectFit
@@ -18,7 +18,7 @@ class Pre_fightScreen: UIViewController {
         return element
     } ()
     
-    private lazy var player2: UIImageView = {
+    private lazy var player2Image: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: "Player 2")
         element.contentMode = .scaleAspectFit
@@ -87,8 +87,8 @@ class Pre_fightScreen: UIViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        view.addSubview(player1)
-        view.addSubview(player2)
+        view.addSubview(player1Image)
+        view.addSubview(player2Image)
         view.addSubview(vsLabel)
         view.addSubview(getReadyLabel)
         view.addSubview(player1Stat)
@@ -113,11 +113,11 @@ extension Pre_fightScreen{
             getReadyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             getReadyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -56),
             
-            player1.bottomAnchor.constraint(equalTo: player1Stat.topAnchor, constant: -9),
-            player1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            player1Image.bottomAnchor.constraint(equalTo: player1Stat.topAnchor, constant: -9),
+            player1Image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            player2.topAnchor.constraint(equalTo: vsLabel.bottomAnchor, constant: 61),
-            player2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            player2Image.topAnchor.constraint(equalTo: vsLabel.bottomAnchor, constant: 61),
+            player2Image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             player1Stat.heightAnchor.constraint(equalToConstant: 50),
             player1Stat.widthAnchor.constraint(equalToConstant: 128),
@@ -126,7 +126,7 @@ extension Pre_fightScreen{
             
             player2Stat.heightAnchor.constraint(equalToConstant: 50),
             player2Stat.widthAnchor.constraint(equalToConstant: 128),
-            player2Stat.topAnchor.constraint(equalTo: player2.bottomAnchor, constant: 10),
+            player2Stat.topAnchor.constraint(equalTo: player2Image.bottomAnchor, constant: 10),
             player2Stat.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
