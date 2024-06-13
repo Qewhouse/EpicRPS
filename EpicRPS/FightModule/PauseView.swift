@@ -14,10 +14,12 @@ final class PauseView: UIView {
     private let homeButton = UIButton(type: .system)
     private let restartButton = UIButton(type: .system)
     private let playButton = UIButton(type: .system)
+    private var superView: UIView?
     
     //MARK: - Init
-    init(model: PauseModel? = nil) {
+    init(model: PauseModel? = nil, superView: UIView) {
         self.viewModel = model
+        self.superView = superView
         super.init(frame: .zero)
         initialize()
     }
@@ -53,18 +55,31 @@ private extension PauseView {
     
     func setupViews() {
         addSubview(buttonStackView)
+        
     }
     
     func setupContraints() {
+        if superView == nil {
+            print("хуй")
+        }
         NSLayoutConstraint.activate([
             buttonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            buttonStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             buttonStackView.widthAnchor.constraint(equalToConstant: 200),
             buttonStackView.heightAnchor.constraint(equalToConstant: 100),
             
             playButton.widthAnchor.constraint(equalToConstant: 60),
-            playButton.heightAnchor.constraint(equalToConstant: 60)
+            playButton.heightAnchor.constraint(equalToConstant: 60),
+            
+            self.heightAnchor.constraint(equalToConstant: 200),
+            self.widthAnchor.constraint(equalToConstant: 100),
+            self.centerXAnchor.constraint(equalTo: superView!.centerXAnchor),
+            self.centerYAnchor.constraint(equalTo: superView!.centerYAnchor)
+            
+            
+            
+            
+            
         ])
     }
     

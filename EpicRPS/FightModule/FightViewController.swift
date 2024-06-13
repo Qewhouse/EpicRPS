@@ -178,8 +178,8 @@ final class FightViewController: UIViewController {
 private extension FightViewController {
     // MARK: - Setup Methods
     func initialize() {
-        setupView()
         cofigurePauseView()
+        setupView()
         setupConstraints()
         setBackground(imageName: "fight background")
         loadRoundTime()
@@ -209,6 +209,7 @@ private extension FightViewController {
     }
     
     func cofigurePauseView() {
+        self.pauseView = PauseView(superView: self.view)
         pauseView.configure(with: .init(maleScore: playerScore, femaleScore: computerScore, actionHandler: { [weak self] action in
             guard let self = self else { return }
             switch action {
