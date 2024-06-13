@@ -71,6 +71,28 @@ final class WinLooseViewController: UIViewController {
 
         return resultLabel
     }()
+    
+    private lazy var homeButtonView: UIButton = {
+        let homeButton = UIButton()
+        homeButton.translatesAutoresizingMaskIntoConstraints = false
+        if let homeImage = UIImage(named: "Home") {
+            homeButton.setImage(homeImage, for: .normal)
+        }
+        homeButton.imageView?.contentMode = .scaleAspectFit
+        homeButton.addTarget(self, action: #selector(homeButtonTapped), for: .touchUpInside)
+        return homeButton
+    }()
+    
+    private lazy var restartButtonView: UIButton = {
+        let restartButton = UIButton()
+        restartButton.translatesAutoresizingMaskIntoConstraints = false
+        if let restartImage = UIImage(named: "Restart") {
+            restartButton.setImage(restartImage, for: .normal)
+        }
+        restartButton.imageView?.contentMode = .scaleAspectFit
+        restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
+        return restartButton
+    }()
 
     
     // MARK: - Life Cycle
@@ -88,8 +110,18 @@ final class WinLooseViewController: UIViewController {
         view.addSubview(playerView)
         view.addSubview(resultLabelView)
         view.addSubview(scoreView)
+        view.addSubview(homeButtonView)
+        view.addSubview(restartButtonView)
     }
     
+    // MARK: - Methods for buttons
+    @objc func homeButtonTapped() {
+        print("Home button tapped")
+    }
+    
+    @objc func restartButtonTapped() {
+        print("Restart button tapped")
+    }
 }
 
 // MARK: - Setup Constraints
@@ -114,7 +146,17 @@ private extension WinLooseViewController {
             scoreView.topAnchor.constraint(equalTo: resultLabelView.bottomAnchor, constant: 17),
             scoreView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor),
             scoreView.widthAnchor.constraint(equalToConstant: 84),
-            scoreView.heightAnchor.constraint(equalToConstant: 49)
+            scoreView.heightAnchor.constraint(equalToConstant: 49),
+            
+            homeButtonView.topAnchor.constraint(equalTo: scoreView.topAnchor, constant: 80),
+            homeButtonView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: -110),
+            homeButtonView.widthAnchor.constraint(equalToConstant: 100),
+            homeButtonView.heightAnchor.constraint(equalToConstant: 50),
+            
+            restartButtonView.topAnchor.constraint(equalTo: homeButtonView.topAnchor),
+            restartButtonView.leadingAnchor.constraint(equalTo: homeButtonView.trailingAnchor, constant: 20),
+            restartButtonView.widthAnchor.constraint(equalToConstant: 100),
+            restartButtonView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
