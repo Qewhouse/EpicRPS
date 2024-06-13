@@ -12,6 +12,10 @@ struct DefaultsSettings {
     private enum Keys: String, CaseIterable {
         case roundTime
         case maxRoundCount
+        case pvpMode
+        case maleScore
+        case femaleScore
+        
     }
     
     static var roundTime: Int? {
@@ -31,6 +35,36 @@ struct DefaultsSettings {
         
         set {
             userDefaults.setValue(newValue, forKey: Keys.maxRoundCount.rawValue)
+        }
+    }
+    
+    static var pvpMode: Bool? {
+        get {
+            userDefaults.bool(forKey: Keys.pvpMode.rawValue)
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: Keys.pvpMode.rawValue)
+        }
+    }
+    
+    static var malePlayerScore: Int? {
+        get {
+            userDefaults.integer(forKey: Keys.maleScore.rawValue)
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: Keys.maleScore.rawValue)
+        }
+    }
+    
+    static var femalePlayerScore: Int? {
+        get {
+            userDefaults.integer(forKey: Keys.femaleScore.rawValue)
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: Keys.femaleScore.rawValue)
         }
     }
 }
