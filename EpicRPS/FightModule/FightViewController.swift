@@ -39,12 +39,17 @@ final class FightViewController: UIViewController {
         case scissors = "Scissors"
         
         static func random() -> VariantHand {
-            return VariantHand.allCases.randomElement()!
+            VariantHand.allCases.randomElement()!
         }
         
         func imageName(for player: String) -> String {
-            return "\(player) hand \(self.rawValue.lowercased())"
+            "\(player) hand \(self.rawValue.lowercased())"
         }
+        
+        func imageNameChoisenButton() -> String {
+            self.rawValue + "_chosen"
+        }
+        
     }
     
     // MARK: - Private Layout
@@ -78,6 +83,14 @@ final class FightViewController: UIViewController {
         return imageView
     }()
     
+    private let bloodImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "blood")
+        return imageView
+    }()
+    
     private let timerlProgressView = VerticalProgressView()
     private let battleProgressView = BattleVerticalProgressView()
     
@@ -106,16 +119,17 @@ final class FightViewController: UIViewController {
     }()
     
     private let rockButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Rock"), for: .normal)
         button.setImage(UIImage(named: "Rock_chosen"), for: .highlighted)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
     }()
     
     private let paperButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Paper"), for: .normal)
         button.setImage(UIImage(named: "Paper_chosen"), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -124,8 +138,9 @@ final class FightViewController: UIViewController {
     }()
     
     private let scissorsButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setImage(UIImage(named: "Scissors"), for: .normal)
+        button.setImage(UIImage(named: "Scissors_chosen")?.withRenderingMode(.alwaysOriginal), for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
@@ -173,10 +188,12 @@ private extension FightViewController {
         resetHands()
         configureProgressView()
         updateScoreLabel()
+        bloodImageView.isHidden = true
     }
     
     func setupView() {
         view.addSubview(femaleHandImageView)
+        view.addSubview(bloodImageView)
         view.addSubview(maleHandImageView)
         view.addSubview(timerlProgressView)
         view.addSubview(battleProgressView)
@@ -198,7 +215,7 @@ private extension FightViewController {
             case .play:
                 self.hidePauseView()
             case .restart:
-                break
+                self.resetGame()
             case .goToHome:
                 break
             }
@@ -264,6 +281,7 @@ private extension FightViewController {
             computerScore += 1
             updateScore()
             startTimer()
+            updateScoreLabel()
             
             if playerScore >= 3 || computerScore >= 3 {
                 endGame()
@@ -283,28 +301,29 @@ private extension FightViewController {
     
     func showDrow() {
         drowImageView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.drowImageView.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.drowImageView.isHidden = true
+            self?.nextRound()
         }
     }
     
     // MARK: - Game Logic
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
+        selectedButton(choice)
         timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
-        
-        determineWinner(playerChoice: choice, computerChoice: computerChoice)
-        
-        animateHands()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self ] in
+            self?.determineWinner(playerChoice: choice, computerChoice: computerChoice)
+        }
     }
     
     private func determineWinner(playerChoice: VariantHand, computerChoice: VariantHand) {
         guard playerChoice != computerChoice else {
             showDrow()
             return }
-        
+        animateHands()
         if (playerChoice == .rock && computerChoice == .scissors) ||
             (playerChoice == .scissors && computerChoice == .paper) ||
             (playerChoice == .paper && computerChoice == .rock) {
@@ -334,7 +353,7 @@ private extension FightViewController {
     func endGame() {
         timer?.invalidate()
         timer = nil
-        
+
         let winner = playerScore > computerScore ? "Player" : "Computer"
         let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -354,22 +373,27 @@ private extension FightViewController {
     func animateHands() {
         let originalMaleTopConstraint = maleHandTopConstraint.constant
         let originalFemaleBottomConstraint = femaleHandBottomConstraint.constant
-        
+
         maleHandTopConstraint.constant = Constants.maleHandToCenterOffset
         femaleHandBottomConstraint.constant = Constants.femaleHandToCenterOffset
-        
+
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         }) { _ in
-            self.maleHandTopConstraint.constant = originalMaleTopConstraint
-            self.femaleHandBottomConstraint.constant = originalFemaleBottomConstraint
             
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            }) { _ in
-                self.resetHands()
-                self.timer?.invalidate()
-                self.startTimer()
+            self.bloodImageView.isHidden = false
+            self.bloodImageView.alpha = 1.0
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.maleHandTopConstraint.constant = originalMaleTopConstraint
+                    self.femaleHandBottomConstraint.constant = originalFemaleBottomConstraint
+                    self.view.layoutIfNeeded()
+                    self.bloodImageView.alpha = 0.0
+                }) { _ in
+                    self.bloodImageView.isHidden = true
+                    self.nextRound()
+                }
             }
         }
     }
@@ -382,6 +406,13 @@ private extension FightViewController {
     func updateScoreLabel() {
         femaleScoreLabel.text = String(computerScore)
         maleScoreLabel.text = String(playerScore)
+    }
+    
+    func nextRound() {
+        self.resetHands()
+        self.timer?.invalidate()
+        self.startTimer()
+        self.selectedButton(nil)
     }
     
     // MARK: - Button Actions
@@ -400,6 +431,33 @@ private extension FightViewController {
     @objc func pauseButtonTapped() {
         showPauseView()
     }
+    
+    private func selectedButton(_ with: VariantHand?) {
+        guard let with = with else {
+            setupBaseImageButton()
+            return
+        }
+        [rockButton, paperButton, scissorsButton].forEach() { $0.isUserInteractionEnabled = false }
+        
+        switch with {
+        case .rock:
+            rockButton.setImage(UIImage(named: VariantHand.rock.imageNameChoisenButton()), for: .normal)
+        case .paper:
+            paperButton.setImage(UIImage(named: VariantHand.paper.imageNameChoisenButton()), for: .normal)
+        case .scissors:
+            scissorsButton.setImage(UIImage(named: VariantHand.scissors.imageNameChoisenButton()), for: .normal)
+        default:
+           break
+        }
+    }
+    
+    func setupBaseImageButton() {
+        [rockButton, paperButton, scissorsButton].forEach() { $0.isUserInteractionEnabled = true }
+        rockButton.setImage(UIImage(named: VariantHand.rock.rawValue), for: .normal)
+        paperButton.setImage(UIImage(named: VariantHand.paper.rawValue), for: .normal)
+        scissorsButton.setImage(UIImage(named: VariantHand.scissors.rawValue), for: .normal)
+    }
+    
     // MARK: - Configure NavigationBar
     func configureNavigationBar() {
         self.navigationItem.rightBarButtonItem = configureBarButtonItem()
@@ -504,7 +562,12 @@ private extension FightViewController {
             fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fightImageView.widthAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeWight),
-            fightImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight)
+            fightImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight),
+            
+            bloodImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bloodImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bloodImageView.widthAnchor.constraint(equalToConstant: 250),
+            bloodImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
     }
 }
