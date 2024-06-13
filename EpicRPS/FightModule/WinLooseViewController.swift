@@ -9,6 +9,22 @@ import UIKit
 
 final class WinLooseViewController: UIViewController {
     
+//  receiving results
+//  receiving scores
+//  change text according to the resutls
+//  change text color according to the results
+//  change background according to the results
+//  change player Image according to the results
+    
+    
+//  gradientLayer.colors = [
+//      UIColor(red: 255/255, green: 182/255, blue: 0/255, alpha: 1.0).cgColor,
+//      UIColor(red: 238/255, green: 65/255, blue: 60/255, alpha: 0.8).cgColor
+//  ] // colors for the loose screen
+    
+    
+
+    
     let player = "Player 2"
     let leftScore = 3
     let rightScore = 1
