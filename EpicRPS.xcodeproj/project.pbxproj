@@ -19,6 +19,7 @@
 		6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */; };
 		6E11177D2C17AF0F003CC000 /* BattleVerticalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177C2C17AF0F003CC000 /* BattleVerticalProgressView.swift */; };
 		6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177E2C18F7CD003CC000 /* PauseView.swift */; };
+		BAC322A52C1B04BA00657304 /* WinLooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC322A42C1B04BA00657304 /* WinLooseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSettings.swift; sourceTree = "<group>"; };
 		6E11177C2C17AF0F003CC000 /* BattleVerticalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleVerticalProgressView.swift; sourceTree = "<group>"; };
 		6E11177E2C18F7CD003CC000 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		BAC322A42C1B04BA00657304 /* WinLooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinLooseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				6E11177C2C17AF0F003CC000 /* BattleVerticalProgressView.swift */,
 				6E11177E2C18F7CD003CC000 /* PauseView.swift */,
 				6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */,
+				BAC322A42C1B04BA00657304 /* WinLooseViewController.swift */,
 			);
 			path = FightModule;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				6E1117772C179532003CC000 /* FightViewController.swift in Sources */,
 				375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */,
 				6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */,
+				BAC322A52C1B04BA00657304 /* WinLooseViewController.swift in Sources */,
 				37F16A442C1A010800CC2C1A /* Pre-fightScreenController.swift in Sources */,
 				37F16A402C19ED9100CC2C1A /* RulesViewController.swift in Sources */,
 				6E11177D2C17AF0F003CC000 /* BattleVerticalProgressView.swift in Sources */,
