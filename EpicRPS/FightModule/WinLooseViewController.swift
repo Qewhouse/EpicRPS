@@ -31,6 +31,11 @@ final class WinLooseViewController: UIViewController {
         UIColor(red: 238/255, green: 65/255, blue: 60/255, alpha: 0.8).cgColor
     ]
     
+    // MARK: - Background Configuration
+    
+    private let winBackground = "result win background"
+    private let looseBackground = "result loose background"
+    
     // MARK: - Score Properties
     var leftScore = 0 {
         didSet {
@@ -48,16 +53,6 @@ final class WinLooseViewController: UIViewController {
     
     
     // MARK: - UI Properties
-    private lazy var gradientLayer: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.type = .radial
-        gradientLayer.colors = outcome ? winColors : looseColors
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradientLayer.frame = view.bounds
-        return gradientLayer
-    }()
     
     private lazy var playerView: UIImageView = {
         let imageName = outcome ? player : computer
@@ -129,12 +124,14 @@ final class WinLooseViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+
     }
 
     
     // MARK: - Private Methods
     private func setupUI() {
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        setBackground(imageName: outcome ? winBackground : looseBackground)
+
         view.addSubview(circleView)
         view.addSubview(playerView)
         view.addSubview(resultLabelView)
@@ -143,7 +140,7 @@ final class WinLooseViewController: UIViewController {
         view.addSubview(restartButtonView)
         
         updateScoreLabel()
-        
+                
         self.navigationItem.hidesBackButton = true
     }
     
@@ -153,6 +150,12 @@ final class WinLooseViewController: UIViewController {
         scoreView.text = "\(leftScore) - \(rightScore)"
     }
     
+    func setBackground(imageName: String) {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: imageName)
+        backgroundImage.contentMode = .scaleAspectFill
+        view.insertSubview(backgroundImage, at: 0)
+    }
     
     
     // MARK: - Methods for buttons
