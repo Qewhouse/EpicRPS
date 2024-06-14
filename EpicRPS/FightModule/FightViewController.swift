@@ -254,7 +254,7 @@ private extension FightViewController {
         timerlProgressView.translatesAutoresizingMaskIntoConstraints = false
         battleProgressView.translatesAutoresizingMaskIntoConstraints = false
         roundTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         battleProgressView.setImages(topImage: UIImage(named: "Player 1")!, bottomImage: UIImage(named: "Player 2")!)
     }
     
@@ -353,14 +353,19 @@ private extension FightViewController {
     func endGame() {
         timer?.invalidate()
         timer = nil
-
-        let winner = playerScore > computerScore ? "Player" : "Computer"
-        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            self.resetGame()
-        }))
         
-        present(alert, animated: true, completion: nil)
+        let winner = playerScore > computerScore ? "Player" : "Computer"
+        //        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
+        //        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        //            self.resetGame()
+        //        }))
+        //
+        //        present(alert, animated: true, completion: nil)
+        let winLooseVC = ResultsViewController()
+        winLooseVC.leftScore = self.playerScore
+        winLooseVC.rightScore = self.computerScore
+        winLooseVC.outcome = playerScore > computerScore
+        navigationController?.pushViewController(winLooseVC, animated: true)
     }
     
     func resetGame() {
@@ -373,10 +378,10 @@ private extension FightViewController {
     func animateHands() {
         let originalMaleTopConstraint = maleHandTopConstraint.constant
         let originalFemaleBottomConstraint = femaleHandBottomConstraint.constant
-
+        
         maleHandTopConstraint.constant = Constants.maleHandToCenterOffset
         femaleHandBottomConstraint.constant = Constants.femaleHandToCenterOffset
-
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         }) { _ in
@@ -447,7 +452,7 @@ private extension FightViewController {
         case .scissors:
             scissorsButton.setImage(UIImage(named: VariantHand.scissors.imageNameChoisenButton()), for: .normal)
         default:
-           break
+            break
         }
     }
     
@@ -519,41 +524,41 @@ private extension FightViewController {
             timerlProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             timerlProgressView.heightAnchor.constraint(equalToConstant: Constants.timerProgressViewHeight),
             timerlProgressView.widthAnchor.constraint(equalToConstant: Constants.timerProgressViewWeght),
-
+            
             battleProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             battleProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             battleProgressView.heightAnchor.constraint(equalToConstant: Constants.battleProgressViewHeight),
             battleProgressView.widthAnchor.constraint(equalToConstant: Constants.battleProgressViewWight),
-
+            
             roundTimeLabel.centerXAnchor.constraint(equalTo: timerlProgressView.centerXAnchor),
             roundTimeLabel.topAnchor.constraint(equalTo: timerlProgressView.bottomAnchor, constant: 10),
-
+            
             maleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
             maleScoreLabel.topAnchor.constraint(equalTo: battleProgressView.bottomAnchor, constant: 10),
-
+            
             femaleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
             femaleScoreLabel.bottomAnchor.constraint(equalTo: battleProgressView.topAnchor, constant: -10),
-
+            
             rockButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.buttonBottomMargin),
             rockButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             rockButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             rockButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             paperButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             paperButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.paperButtonBottomMargin),
             paperButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             paperButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             scissorsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             scissorsButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             drowImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             drowImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             drowImageView.widthAnchor.constraint(equalToConstant:  Constants.fightDrawImageViewSizeWight),
             drowImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight),
-
+            
             fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fightImageView.widthAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeWight),

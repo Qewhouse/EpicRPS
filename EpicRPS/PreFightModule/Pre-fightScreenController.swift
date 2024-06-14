@@ -8,6 +8,11 @@
 import UIKit
 
 class Pre_fightScreen: UIViewController {
+    //MARK: - Dependencies
+    var player1winStat: Int = 12
+    var player1looseStat: Int = 6
+    var player2winStat: Int = 25
+    var player2looseStat: Int = 33
     
     // MARK: - UI Properties
     private lazy var player1: UIImageView = {
@@ -16,7 +21,7 @@ class Pre_fightScreen: UIViewController {
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
-    } ()
+    }()
     
     private lazy var player2: UIImageView = {
         let element = UIImageView()
@@ -24,7 +29,7 @@ class Pre_fightScreen: UIViewController {
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
-    } ()
+    }()
     
     private let vsLabel: UILabel = {
         let element = UILabel()
@@ -46,34 +51,33 @@ class Pre_fightScreen: UIViewController {
         return element
     }()
     
-    private let player1Stat: UITextView = {
-        let element = UITextView()
+    private lazy var player1Stat: UILabel = {
+        let element = UILabel()
         element.textColor = .white
-        element.backgroundColor = .clear
+        element.textAlignment = .center
+        element.numberOfLines = 0
         element.text =
         """
-        10 Victories /
-            2 Lose
+        \(player1winStat) Victories /
+        \(player1looseStat) Lose
         """
         element.font = UIFont.boldSystemFont(ofSize: 19.5)
-        element.contentMode = .scaleAspectFill
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    private let player2Stat: UITextView = {
-        let element = UITextView()
+    private lazy var player2Stat: UILabel = {
+        let element = UILabel()
         element.textColor = .white
-        element.backgroundColor = .clear
+        element.textAlignment = .center
+        element.numberOfLines = 0
         element.text =
         """
-        23 Victories /
-             1 Lose
+        \(player2winStat) Victories /
+        \(player2looseStat) Lose
         """
         element.font = UIFont.boldSystemFont(ofSize: 19.5)
-        element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
-        print(element)
         return element
     }()
     
@@ -136,14 +140,14 @@ private extension Pre_fightScreen{
             player2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             player1Stat.heightAnchor.constraint(equalToConstant: 50),
-            player1Stat.widthAnchor.constraint(equalToConstant: 128),
+            player1Stat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            player1Stat.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
             player1Stat.bottomAnchor.constraint(equalTo: vsLabel.topAnchor, constant: -61),
-            player1Stat.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             player2Stat.heightAnchor.constraint(equalToConstant: 50),
-            player2Stat.widthAnchor.constraint(equalToConstant: 128),
+            player2Stat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            player2Stat.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
             player2Stat.topAnchor.constraint(equalTo: player2.bottomAnchor, constant: 10),
-            player2Stat.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 }

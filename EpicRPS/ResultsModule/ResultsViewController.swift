@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WinLooseViewController: UIViewController {
+final class ResultsViewController: UIViewController {
 
     // MARK: - Properties
     private let winResult = "You Win"
@@ -137,12 +137,13 @@ final class WinLooseViewController: UIViewController {
     
     @objc func restartButtonTapped() {
         print("Restart button tapped")
+        navigationController?.popViewController(animated: true)
     //TODO: "kill FightViewController -> reboot FightViewController"
     }
 }
 
 // MARK: - Setup Constraints
-private extension WinLooseViewController {
+private extension ResultsViewController {
      func setupConstraints() {
         NSLayoutConstraint.activate([
             circleView.widthAnchor.constraint(equalToConstant: 176),
