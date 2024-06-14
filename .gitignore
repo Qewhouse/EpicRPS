@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift,swiftpackagemanager,objective-c
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,swiftpackagemanager,objective-c
 
+# Local DS_Store
+.DS_Store
+
 ### Objective-C ###
 # Xcode
 #
