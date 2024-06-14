@@ -9,37 +9,49 @@ import UIKit
 
 final class WinLooseViewController: UIViewController {
     
-//  receiving results
-//  receiving scores
-//  change text according to the resutls
-//  change text color according to the results
-//  change background according to the results
-//  change player Image according to the results
-    
-    
-//  gradientLayer.colors = [
-//      UIColor(red: 255/255, green: 182/255, blue: 0/255, alpha: 1.0).cgColor,
-//      UIColor(red: 238/255, green: 65/255, blue: 60/255, alpha: 0.8).cgColor
-//  ] // colors for the loose screen
-    
-    
 
+    // MARK: - Properties
+    private let winResult = "You Win"
+    private let looseResult = "You Lose"
+    private let winColor = UIColor(red: 255.0, green: 178.0, blue: 76.0, alpha: 1.0)
+    private let looseColor = UIColor.black
     
-    let player = "Player 2"
-    let leftScore = 3
-    let rightScore = 1
-    let winResult = "You Win"
-    let looseResult = "You Loose"
+    // MARK: - Player Configuration
+    private let player = "Player 2"
+    private let computer = "Player 1"
+    
+    // MARK: - Color Configuration
+    private let winColors = [
+        UIColor(red: 45/255, green: 37/255, blue: 153/255, alpha: 1.0).cgColor,
+        UIColor(red: 101/255, green: 109/255, blue: 244/255, alpha: 1.0).cgColor
+    ]
+    
+    private let looseColors = [
+        UIColor(red: 255/255, green: 182/255, blue: 0/255, alpha: 1.0).cgColor,
+        UIColor(red: 238/255, green: 65/255, blue: 60/255, alpha: 0.8).cgColor
+    ]
+    
+    // MARK: - Score Properties
+    var leftScore = 0 {
+        didSet {
+            updateScoreLabel()
+        }
+    }
+    var rightScore = 0 {
+        didSet {
+            updateScoreLabel()
+        }
+    }
+    
+    // MARK: - Game Outcome
+    var outcome = true
     
     
     // MARK: - UI Properties
     private lazy var gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.type = .radial
-        gradientLayer.colors = [
-            UIColor(red: 45/255, green: 37/255, blue: 153/255, alpha: 1.0).cgColor,
-            UIColor(red: 101/255, green: 109/255, blue: 244/255, alpha: 1.0).cgColor
-        ]
+        gradientLayer.colors = outcome ? winColors : looseColors
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
@@ -48,7 +60,8 @@ final class WinLooseViewController: UIViewController {
     }()
     
     private lazy var playerView: UIImageView = {
-        let image = UIImage(named: player)
+        let imageName = outcome ? player : computer
+        let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -66,9 +79,10 @@ final class WinLooseViewController: UIViewController {
     
     private lazy var resultLabelView: UILabel = {
         let resultLabel = UILabel()
-        resultLabel.text = winResult
+        let outputText = outcome ? winResult : looseResult
+        resultLabel.text = outputText
         resultLabel.font = UIFont(name: "Helvetica-Bold", size: 38)
-        resultLabel.textColor = UIColor(red: 1.0, green: 0.696, blue: 0.298, alpha: 1.0) // Custom color #FFB24C
+        resultLabel.textColor = outcome ? winColor : looseColor
         resultLabel.textAlignment = .center
         resultLabel.adjustsFontSizeToFitWidth = true
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +92,6 @@ final class WinLooseViewController: UIViewController {
     
     private lazy var scoreView: UILabel = {
         let resultLabel = UILabel()
-        resultLabel.text = "\(leftScore) - \(rightScore)"
         resultLabel.font = UIFont(name: "Futura-Bold", size: 38)
         resultLabel.textColor = .white
         resultLabel.textAlignment = .center
@@ -128,16 +141,30 @@ final class WinLooseViewController: UIViewController {
         view.addSubview(scoreView)
         view.addSubview(homeButtonView)
         view.addSubview(restartButtonView)
+        
+        updateScoreLabel()
+        
+        self.navigationItem.hidesBackButton = true
     }
+    
+    
+    // MARK: - Update UI
+    private func updateScoreLabel() {
+        scoreView.text = "\(leftScore) - \(rightScore)"
+    }
+    
+    
     
     // MARK: - Methods for buttons
     @objc func homeButtonTapped() {
-        print("Home button tapped")
+        let menuVC = MainViewController()
+        navigationController?.pushViewController(menuVC, animated: true)
     }
     
     @objc func restartButtonTapped() {
         print("Restart button tapped")
     }
+    
 }
 
 // MARK: - Setup Constraints

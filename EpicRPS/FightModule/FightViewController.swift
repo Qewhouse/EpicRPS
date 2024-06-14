@@ -354,13 +354,22 @@ private extension FightViewController {
         timer?.invalidate()
         timer = nil
 
-        let winner = playerScore > computerScore ? "Player" : "Computer"
-        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            self.resetGame()
-        }))
+//        let winner = playerScore > computerScore ? "Player" : "Computer"
+//        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+//            self.resetGame()
+//        }))
+//        
+//        present(alert, animated: true, completion: nil)
         
-        present(alert, animated: true, completion: nil)
+//      Завернуть в функцию тоже можно
+        let winLooseVC = WinLooseViewController()
+        winLooseVC.leftScore = self.playerScore
+        winLooseVC.rightScore = self.computerScore
+        winLooseVC.outcome = playerScore > computerScore
+
+        navigationController?.pushViewController(winLooseVC, animated: true)
+        self.resetGame()
     }
     
     func resetGame() {
