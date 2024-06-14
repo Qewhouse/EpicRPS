@@ -45,7 +45,7 @@ private extension PauseView {
         configureButtonStackView()
         configureButtons()
         setupContraints()
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "backgroundColor")
         layer.cornerRadius = 10
         clipsToBounds = true
         
@@ -58,14 +58,19 @@ private extension PauseView {
     func setupContraints() {
         NSLayoutConstraint.activate([
             buttonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            buttonStackView.widthAnchor.constraint(equalToConstant: 150),
-            buttonStackView.heightAnchor.constraint(equalToConstant: 100)
+//            buttonStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            buttonStackView.widthAnchor.constraint(equalToConstant: 200),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 100),
+            
+            playButton.widthAnchor.constraint(equalToConstant: 60),
+            playButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
     func configureButtonStackView() {
         buttonStackView.axis = .horizontal
+        buttonStackView.spacing = 10
         buttonStackView.distribution = .equalSpacing
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.addArrangedSubview(homeButton)
@@ -76,11 +81,12 @@ private extension PauseView {
     func configureButtons() {
         homeButton.setImage(UIImage(named: "Home"), for: .normal)
         restartButton.setImage(UIImage(named: "Restart"), for: .normal)
-        playButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
+        playButton.setImage(UIImage(named: "Play"), for: .normal)
         
-        homeButton.imageView?.contentMode = .scaleAspectFill
-        restartButton.imageView?.contentMode = .scaleAspectFill
-        playButton.imageView?.contentMode = .scaleAspectFill
+        
+        homeButton.imageView?.contentMode = .scaleAspectFit
+        restartButton.imageView?.contentMode = .scaleAspectFit
+        playButton.imageView?.contentMode = .scaleAspectFit
         
         
         playButton.addTarget(self, action: #selector(tappedPlaytButton), for: .touchUpInside)
@@ -117,6 +123,8 @@ extension PauseView {
         case play
     }
 }
+
+
 
 
 
