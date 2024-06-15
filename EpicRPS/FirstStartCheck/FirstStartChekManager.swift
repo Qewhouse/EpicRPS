@@ -18,6 +18,7 @@ final class FirstStartChekService: NSObject {
             DefaultsSettings.pvpMode = false
             DefaultsSettings.roundTime = 30
             DefaultsSettings.darkMode = false 
+            DefaultsSettings.defaultFonMusicName = "Мелодия 1"
             DefaultsSettings.isFirstStart = true
         }
     }
