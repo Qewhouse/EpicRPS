@@ -92,6 +92,7 @@ final class MainViewController: UIViewController {
     
     @objc private func settingsButtonTapped() {
         print("settingsButtonTapped")
+        navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
     
     @objc private func rulesButtonTapped() {
