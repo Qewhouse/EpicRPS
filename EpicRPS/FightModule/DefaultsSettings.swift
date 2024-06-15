@@ -16,7 +16,8 @@ struct DefaultsSettings {
         case pvpMode
         case maleScore
         case femaleScore
-        
+        case darkMode
+        case defaultFonMusic
     }
     
     static var isFirstStart: Bool? {
@@ -26,6 +27,16 @@ struct DefaultsSettings {
         
         set {
             userDefaults.setValue(newValue, forKey: Keys.firstStart.rawValue)
+        }
+    }
+    
+    static var darkMode: Bool? {
+        get {
+            userDefaults.bool(forKey: Keys.darkMode.rawValue)
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: Keys.darkMode.rawValue)
         }
     }
     
@@ -96,6 +107,16 @@ struct DefaultsSettings {
         
         set {
             userDefaults.setValue(newValue, forKey: Keys.femaleScore.rawValue)
+        }
+    }
+    
+    static var defaultFonMusicName: String? {
+        get {
+            userDefaults.string(forKey: Keys.defaultFonMusic.rawValue)
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: Keys.defaultFonMusic.rawValue)
         }
     }
 }

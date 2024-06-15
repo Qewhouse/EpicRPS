@@ -52,6 +52,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
     }()
     
     private let musicOptions = ["Мелодия 1", "Мелодия 2", "Мелодия 3"] // добавить звуки и переименовать
+    private let variantTime = [30, 60]
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -66,6 +67,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
         musicPicker.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
     // MARK: - Navigation Bar
     func showNavigationBar() {
         title = "Настройки"
@@ -120,6 +125,9 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
         playWithFriendLabel.text = "Игра с другом"
         playWithFriendLabel.font = UIFont.systemFont(ofSize: 18)
         playWithFriendLabel.textColor = .white
+        
+        //Добавление отлеживаения для времени игры
+        gameTimeSC.addTarget(self, action: #selector(didSelectTime), for: .valueChanged)
     }
     
     // MARK: - Constraints
@@ -233,6 +241,10 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
         saveUserSettings()
     }
     
+    @objc private func didSelectTime(select: UISegmentedControl) {
+        DefaultsSettings.roundTime = variantTime[gameTimeSC.selectedSegmentIndex]
+    }
+    
     // MARK: - UIPickerViewDataSource
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -263,30 +275,18 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
     
     // MARK: - User Defaults
     private func saveUserSettings() {
-        let defaults = UserDefaults.standard
-        defaults.set(gameTimeSC.selectedSegmentIndex, forKey: "gameTime")
-        defaults.set(backgroundSwitch.isOn, forKey: "backgroundColor")
-        defaults.set(playWithFriendsSwitch.isOn, forKey: "playWithFriends")
-        if let selectedMusicTitle = musicButton.title(for: .normal) {
-            defaults.set(selectedMusicTitle, forKey: "selectedMusic")
-        }
+        DefaultsSettings.roundTime = variantTime[gameTimeSC.selectedSegmentIndex]
+        DefaultsSettings.darkMode = backgroundSwitch.isOn
+        DefaultsSettings.pvpMode = playWithFriendsSwitch.isOn
+        DefaultsSettings.defaultFonMusicName = musicButton.title(for: .normal)
     }
     
     private func loadUserSettings() {
-        let defaults = UserDefaults.standard
-        if let savedGameTime = defaults.value(forKey: "gameTime") as? Int {
-            gameTimeSC.selectedSegmentIndex = savedGameTime
-        }
-        if let savedBackgroundColor = defaults.value(forKey: "backgroundColor") as? Bool {
-            backgroundSwitch.isOn = savedBackgroundColor
-            view.backgroundColor = savedBackgroundColor ? .black : .white
-        }
-        if let savedPlayWithFriends = defaults.value(forKey: "playWithFriends") as? Bool {
-            playWithFriendsSwitch.isOn = savedPlayWithFriends
-        }
-        if let savedSelectedMusic = defaults.string(forKey: "selectedMusic") {
-            musicButton.setTitle(savedSelectedMusic, for: .normal)
-        }
+        gameTimeSC.selectedSegmentIndex = DefaultsSettings.roundTime == 30 ? 0 : 1
+        backgroundSwitch.isOn = DefaultsSettings.darkMode!
+        view.backgroundColor = backgroundSwitch.isOn ? .black : .white
+        playWithFriendsSwitch.isOn = DefaultsSettings.pvpMode!
+        musicButton.setTitle(DefaultsSettings.defaultFonMusicName, for: .normal)
     }
 }
 
@@ -311,3 +311,4 @@ extension UIView {
         return stackView
     }
 }
+
