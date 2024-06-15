@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - VerticalProgressView
-class VerticalProgressView: UIView {
+final class VerticalProgressView: UIView {
     
     // MARK: - Private Properties
     private let progressView: UIProgressView = {
@@ -77,3 +77,4 @@ class VerticalProgressView: UIView {
         ])
     }
 }
+
