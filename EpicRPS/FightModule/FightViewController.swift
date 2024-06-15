@@ -5,6 +5,7 @@
 //  Created by Станислав Артамонов on 10.06.24.
 //
 import UIKit
+import AVFoundation
 
 final class FightViewController: UIViewController {
     
@@ -67,7 +68,7 @@ final class FightViewController: UIViewController {
     private let fightImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "fight")
+        imageView.image = UIImage.fight
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -75,7 +76,7 @@ final class FightViewController: UIViewController {
     private let drowImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "draw")
+        imageView.image = UIImage.draw
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -84,7 +85,7 @@ final class FightViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "blood")
+        imageView.image = UIImage.blood
         return imageView
     }()
     
@@ -117,8 +118,8 @@ final class FightViewController: UIViewController {
     
     private let rockButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Rock"), for: .normal)
-        button.setImage(UIImage(named: "Rock_chosen"), for: .highlighted)
+        button.setImage(UIImage.rock, for: .normal)
+        button.setImage(UIImage.rockChosen, for: .highlighted)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
@@ -127,8 +128,8 @@ final class FightViewController: UIViewController {
     
     private let paperButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Paper"), for: .normal)
-        button.setImage(UIImage(named: "Paper_chosen"), for: .highlighted)
+        button.setImage(UIImage.paper, for: .normal)
+        button.setImage(UIImage.paperChosen, for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
@@ -136,8 +137,8 @@ final class FightViewController: UIViewController {
     
     private let scissorsButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Scissors"), for: .normal)
-        button.setImage(UIImage(named: "Scissors_chosen")?.withRenderingMode(.alwaysOriginal), for: .highlighted)
+        button.setImage(UIImage.scissors, for: .normal)
+        button.setImage(UIImage.scissorsChosen, for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         return button
@@ -415,8 +416,8 @@ private extension FightViewController {
     }
     
     func resetHands() {
-        maleHandImageView.image = UIImage(named: "male hand")
-        femaleHandImageView.image = UIImage(named: "female hand")
+        maleHandImageView.image = .maleHand
+        femaleHandImageView.image = .femaleHand
     }
     
     func updateScoreLabel() {
@@ -481,7 +482,7 @@ private extension FightViewController {
     }
     
     func configureBarButtonItem() -> UIBarButtonItem {
-        let navigationItem = UIBarButtonItem(image: UIImage(named: "Pause"), style: .done, target: self, action: #selector(pauseButtonTapped))
+        let navigationItem = UIBarButtonItem(image: .pause, style: .done, target: self, action: #selector(pauseButtonTapped))
         navigationItem.tintColor = .black
         return navigationItem
     }
@@ -585,4 +586,3 @@ private extension FightViewController {
         ])
     }
 }
-
