@@ -1,7 +1,7 @@
 # DevRush Marathon XII Challenge #1 - Rock-Scissors-Paper
 ![GitHub repo size](https://img.shields.io/github/repo-size/Qewhouse/EpicRPS)  ![GitHub contributors](https://img.shields.io/github/contributors/Qewhouse/EpicRPS)   ![GitHub last commit](https://img.shields.io/github/last-commit/Qewhouse/EpicRPS) ![][ios] ![][swift] ![][uikit]
 
-![](https://github.com/Qewhouse/EpicRPS/blob/develop/banner.gif)
+![](https://github.com/Qewhouse/EpicRPS/blob/develop/appBanner.gif)
 
 ---
 
