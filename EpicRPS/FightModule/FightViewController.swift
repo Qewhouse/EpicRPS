@@ -181,7 +181,7 @@ final class FightViewController: UIViewController {
         startTimerAndHideFight()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sound.stop()
     }
