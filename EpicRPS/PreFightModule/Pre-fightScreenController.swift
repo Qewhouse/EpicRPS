@@ -12,10 +12,10 @@ class Pre_fightScreen: UIViewController {
     private let sound = SoundPlayer.shared
     
     //MARK: - Dependencies
-    var player1winStat: Int = 12
-    var player1looseStat: Int = 6
-    var player2winStat: Int = 25
-    var player2looseStat: Int = 33
+    var player1winStat: Int = DefaultsSettings.maleWinPlayerScore!
+    var player1looseStat: Int = DefaultsSettings.maleLoosePlayerScore!
+    var player2winStat: Int = DefaultsSettings.femaleWinPlayerScore!
+    var player2looseStat: Int = DefaultsSettings.femaleLoosePlayerScore!
     
     // MARK: - UI Properties
     private lazy var player1: UIImageView = {

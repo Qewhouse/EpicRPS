@@ -7,6 +7,8 @@
 import UIKit
 
 final class FightViewController: UIViewController {
+    // SoundPlayer
+    private let sound = SoundPlayer.shared
     
     // MARK: - Enum
     private enum Constants {
@@ -320,6 +322,7 @@ private extension FightViewController {
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
         selectedButton(choice)
+        sound.play(.handSelection)
         timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
@@ -355,6 +358,8 @@ private extension FightViewController {
         timer = nil
         updateTotalScore()
         let winner = playerScore > computerScore ? "Player" : "Computer"
+        sound.play(.winApplause)
+
         let winLooseVC = ResultsViewController()
         winLooseVC.leftScore = self.playerScore
         winLooseVC.rightScore = self.computerScore
@@ -394,6 +399,7 @@ private extension FightViewController {
             
             self.bloodImageView.isHidden = false
             self.bloodImageView.alpha = 1.0
+            self.sound.play(.handStrike)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                 UIView.animate(withDuration: 0.5, animations: {
