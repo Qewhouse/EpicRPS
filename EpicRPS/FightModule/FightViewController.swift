@@ -4,8 +4,6 @@
 //
 //  Created by Станислав Артамонов on 10.06.24.
 //
-
-import Foundation
 import UIKit
 
 final class FightViewController: UIViewController {
@@ -29,7 +27,7 @@ final class FightViewController: UIViewController {
         static let fightDrawImageViewSizeWight: CGFloat = 200
         static let timerProgressViewHeight: CGFloat = 166
         static let timerProgressViewWeght: CGFloat = 9
-        static let battleProgressViewHeight: CGFloat = 300
+        static let battleProgressViewHeight: CGFloat = 250
         static let battleProgressViewWight: CGFloat = 9
     }
     
@@ -92,7 +90,7 @@ final class FightViewController: UIViewController {
     }()
     
     private let timerlProgressView = VerticalProgressView()
-    private let battleProgressView = BattleVerticalProgressView()
+    private let battleProgressView = DualPlayerProgressView()
     
     private let roundTimeLabel: UILabel = {
         let label = UILabel()
@@ -164,8 +162,15 @@ final class FightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        DefaultsSettings.roundTime = 30
         roundTime = DefaultsSettings.roundTime ?? Constants.roundTime
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.resetGame()
+        self.timerlProgressView.progress = Float(DefaultsSettings.roundTime!)
+        loadRoundTime()
+        navigationController?.isNavigationBarHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -191,6 +196,8 @@ private extension FightViewController {
         bloodImageView.isHidden = true
     }
     
+    
+    
     func setupView() {
         view.addSubview(femaleHandImageView)
         view.addSubview(bloodImageView)
@@ -209,28 +216,30 @@ private extension FightViewController {
     }
     
     func cofigurePauseView() {
-        pauseView.configure(with: .init(maleScore: playerScore, femaleScore: computerScore, actionHandler: { [weak self] action in
-            guard let self = self else { return }
-            switch action {
-            case .play:
-                self.hidePauseView()
-            case .restart:
-                self.resetGame()
-            case .goToHome:
-                break
-            }
-        }))
-        
+        configurePauseViewModel()
         pauseView.translatesAutoresizingMaskIntoConstraints = false
         pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         pauseView.alpha = 0
     }
     
+    func configurePauseViewModel() {
+        pauseView.configure(with: .init(maleScore: playerScore, femaleScore: computerScore, actionHandler: { [weak self] action in
+            guard let self = self else { return }
+            switch action {
+            case .play:
+                self.resumeGame()
+            case .restart:
+                self.restartInPauseView()
+            case .goToHome:
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }))
+    }
     func setBackground(imageName: String) {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: imageName)
         backgroundImage.contentMode = .scaleAspectFill
-        view.insertSubview(backgroundImage, at: 0) // Вставляем изображение на задний план
+        view.insertSubview(backgroundImage, at: 0)
         drowImageView.isHidden = true
     }
     
@@ -245,20 +254,16 @@ private extension FightViewController {
     }
     
     func configureProgressView() {
-        battleProgressView.trackColor = .cyan
-        battleProgressView.progressColor = .orange
-        timerlProgressView.progressColor = .green
-        timerlProgressView.trackColor = .darkGray
-        battleProgressView.progress = 0.5
-        
+       timerlProgressView.progressColor = .green
+       timerlProgressView.trackColor = .darkGray
+        battleProgressView.updateProgress(player1Score: 0, player2Score: 0)
         timerlProgressView.translatesAutoresizingMaskIntoConstraints = false
         battleProgressView.translatesAutoresizingMaskIntoConstraints = false
         roundTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        battleProgressView.setImages(topImage: UIImage(named: "Player 1")!, bottomImage: UIImage(named: "Player 2")!)
     }
     
     func startTimerAndHideFight() {
+        self.fightImageView.isHidden = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.fightImageView.isHidden = true
             self.startTimer()
@@ -275,16 +280,20 @@ private extension FightViewController {
     
     @objc func updateTimer() {
         elapsedTime += 1
-        if elapsedTime >= roundTime {
+        if playerScore == 3 || computerScore == 3 {
+            timer?.invalidate()
+            timer = nil
+        }
+        
+        if elapsedTime >= roundTime{
             timer?.invalidate()
             timer = nil
             computerScore += 1
             updateScore()
-            startTimer()
-            updateScoreLabel()
-            
-            if playerScore >= 3 || computerScore >= 3 {
+            if playerScore == 3 || computerScore == 3 {
                 endGame()
+            } else {
+                startTimer()
             }
         }
         updateProgress()
@@ -323,7 +332,7 @@ private extension FightViewController {
         guard playerChoice != computerChoice else {
             showDrow()
             return }
-        animateHands()
+        
         if (playerChoice == .rock && computerChoice == .scissors) ||
             (playerChoice == .scissors && computerChoice == .paper) ||
             (playerChoice == .paper && computerChoice == .rock) {
@@ -331,52 +340,54 @@ private extension FightViewController {
         } else {
             computerScore += 1
         }
-        
+        animateHands()
         updateScore()
         updateScoreLabel()
-        if playerScore >= 3 || computerScore >= 3 {
-            endGame()
-        }
+       
     }
     
     func updateScore() {
-        let totalRounds = playerScore + computerScore
-        guard totalRounds > 0 else {
-            battleProgressView.setProgress(0.5, animated: true)
-            return
-        }
-        let scoreDifference = Float(playerScore - computerScore)
-        let playerProgress = 0.5 + (scoreDifference / 6.0)
-        battleProgressView.setProgress(playerProgress, animated: true)
+        battleProgressView.updateProgress(player1Score: playerScore, player2Score: computerScore)
     }
     
     func endGame() {
         timer?.invalidate()
         timer = nil
-
+        updateTotalScore()
         let winner = playerScore > computerScore ? "Player" : "Computer"
-        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            self.resetGame()
-        }))
-        
-        present(alert, animated: true, completion: nil)
+        let winLooseVC = ResultsViewController()
+        winLooseVC.leftScore = self.playerScore
+        winLooseVC.rightScore = self.computerScore
+        winLooseVC.outcome = playerScore > computerScore
+        navigationController?.pushViewController(winLooseVC, animated: true)
+    }
+    
+    func updateTotalScore() {
+        if playerScore > computerScore {
+            DefaultsSettings.maleWinPlayerScore! += 1
+            DefaultsSettings.femaleLoosePlayerScore! += 1
+        } else {
+            DefaultsSettings.femaleWinPlayerScore! += 1
+            DefaultsSettings.maleLoosePlayerScore! += 1
+        }
     }
     
     func resetGame() {
+        timer?.invalidate()
+        timer = nil
         playerScore = 0
         computerScore = 0
         updateScoreLabel()
-        battleProgressView.setProgress(0.5, animated: true)
+        battleProgressView.updateProgress(player1Score: 0, player2Score: 0)
     }
     
     func animateHands() {
         let originalMaleTopConstraint = maleHandTopConstraint.constant
         let originalFemaleBottomConstraint = femaleHandBottomConstraint.constant
-
+        
         maleHandTopConstraint.constant = Constants.maleHandToCenterOffset
         femaleHandBottomConstraint.constant = Constants.femaleHandToCenterOffset
-
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         }) { _ in
@@ -390,9 +401,14 @@ private extension FightViewController {
                     self.femaleHandBottomConstraint.constant = originalFemaleBottomConstraint
                     self.view.layoutIfNeeded()
                     self.bloodImageView.alpha = 0.0
+                    if self.computerScore == 3 || self.playerScore == 3 {
+                        self.endGame()
+                    }
                 }) { _ in
                     self.bloodImageView.isHidden = true
-                    self.nextRound()
+                    if self.computerScore != 3 || self.playerScore != 3 {
+                        self.nextRound()
+                    }
                 }
             }
         }
@@ -447,7 +463,7 @@ private extension FightViewController {
         case .scissors:
             scissorsButton.setImage(UIImage(named: VariantHand.scissors.imageNameChoisenButton()), for: .normal)
         default:
-           break
+            break
         }
     }
     
@@ -462,7 +478,6 @@ private extension FightViewController {
     func configureNavigationBar() {
         self.navigationItem.rightBarButtonItem = configureBarButtonItem()
         self.navigationItem.hidesBackButton = true
-        
     }
     
     func configureBarButtonItem() -> UIBarButtonItem {
@@ -472,8 +487,8 @@ private extension FightViewController {
     }
     
     //MARK: - PasueView Show
-    
     func showPauseView() {
+        configurePauseViewModel()
         timer?.invalidate()
         pauseView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
@@ -483,13 +498,22 @@ private extension FightViewController {
     }
     
     func hidePauseView() {
-        startTimer()
         UIView.animate(withDuration: 0.3, animations: {
             self.pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             self.pauseView.alpha = 0.0
         }) { _ in
             self.pauseView.isHidden = true
         }
+    }
+    
+    func resumeGame() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        hidePauseView()
+    }
+    
+    func restartInPauseView() {
+        hidePauseView()
+        resetGame()
     }
 }
 
@@ -519,41 +543,35 @@ private extension FightViewController {
             timerlProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             timerlProgressView.heightAnchor.constraint(equalToConstant: Constants.timerProgressViewHeight),
             timerlProgressView.widthAnchor.constraint(equalToConstant: Constants.timerProgressViewWeght),
-
+            
             battleProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             battleProgressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             battleProgressView.heightAnchor.constraint(equalToConstant: Constants.battleProgressViewHeight),
             battleProgressView.widthAnchor.constraint(equalToConstant: Constants.battleProgressViewWight),
-
+            
             roundTimeLabel.centerXAnchor.constraint(equalTo: timerlProgressView.centerXAnchor),
             roundTimeLabel.topAnchor.constraint(equalTo: timerlProgressView.bottomAnchor, constant: 10),
-
-            maleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
-            maleScoreLabel.topAnchor.constraint(equalTo: battleProgressView.bottomAnchor, constant: 10),
-
-            femaleScoreLabel.centerXAnchor.constraint(equalTo: battleProgressView.centerXAnchor),
-            femaleScoreLabel.bottomAnchor.constraint(equalTo: battleProgressView.topAnchor, constant: -10),
 
             rockButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.buttonBottomMargin),
             rockButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             rockButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             rockButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             paperButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             paperButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.paperButtonBottomMargin),
             paperButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             paperButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             scissorsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.buttonBottomMargin),
             scissorsButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             scissorsButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
-
+            
             drowImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             drowImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             drowImageView.widthAnchor.constraint(equalToConstant:  Constants.fightDrawImageViewSizeWight),
             drowImageView.heightAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeHeight),
-
+            
             fightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fightImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             fightImageView.widthAnchor.constraint(equalToConstant: Constants.fightDrawImageViewSizeWight),
@@ -566,3 +584,4 @@ private extension FightViewController {
         ])
     }
 }
+
