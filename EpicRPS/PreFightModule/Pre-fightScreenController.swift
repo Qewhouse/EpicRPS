@@ -8,6 +8,9 @@
 import UIKit
 
 class Pre_fightScreen: UIViewController {
+    //MARK: - SoundPlayer
+    private let sound = SoundPlayer.shared
+    
     //MARK: - Dependencies
     var player1winStat: Int = 12
     var player1looseStat: Int = 6
