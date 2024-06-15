@@ -47,7 +47,6 @@ final class FightViewController: UIViewController {
         func imageNameChoisenButton() -> String {
             self.rawValue + "_chosen"
         }
-        
     }
     
     // MARK: - Private Layout
@@ -196,8 +195,6 @@ private extension FightViewController {
         bloodImageView.isHidden = true
     }
     
-    
-    
     func setupView() {
         view.addSubview(femaleHandImageView)
         view.addSubview(bloodImageView)
@@ -235,6 +232,7 @@ private extension FightViewController {
             }
         }))
     }
+    
     func setBackground(imageName: String) {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: imageName)
@@ -244,7 +242,9 @@ private extension FightViewController {
     }
     
     func loadRoundTime() {
-        roundTimeLabel.text = "0:\(Constants.roundTime)"
+        let minutes =  DefaultsSettings.roundTime! / 60
+        let seconds =  DefaultsSettings.roundTime! % 60
+        roundTimeLabel.text = String(format: "%2d:%02d", minutes, seconds)
     }
     
     func configureButton() {
@@ -514,6 +514,7 @@ private extension FightViewController {
     func restartInPauseView() {
         hidePauseView()
         resetGame()
+        startTimer()
     }
 }
 

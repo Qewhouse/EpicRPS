@@ -17,6 +17,7 @@ final class FirstStartChekService: NSObject {
             DefaultsSettings.maxRoundCount = 3
             DefaultsSettings.pvpMode = false
             DefaultsSettings.roundTime = 30
+            DefaultsSettings.darkMode = false 
             DefaultsSettings.isFirstStart = true
         }
     }
