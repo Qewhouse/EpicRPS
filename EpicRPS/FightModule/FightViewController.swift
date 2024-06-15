@@ -283,7 +283,6 @@ private extension FightViewController {
         if playerScore == 3 || computerScore == 3 {
             timer?.invalidate()
             timer = nil
-            endGame()
         }
         
         if elapsedTime >= roundTime{
@@ -291,12 +290,11 @@ private extension FightViewController {
             timer = nil
             computerScore += 1
             updateScore()
-            if  playerScore < 3 || computerScore < 3  {
-                startTimer()
-            } else {
+            if playerScore == 3 || computerScore == 3 {
                 endGame()
+            } else {
+                startTimer()
             }
-            updateScoreLabel()
         }
         updateProgress()
     }
@@ -586,3 +584,4 @@ private extension FightViewController {
         ])
     }
 }
+
