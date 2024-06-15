@@ -14,8 +14,10 @@ struct DefaultsSettings {
         case roundTime
         case maxRoundCount
         case pvpMode
-        case maleScore
-        case femaleScore
+        case maleWinScore
+        case femaleWinScore
+        case maleLoseScore
+        case femaleLooseScore
         case darkMode
         case defaultFonMusic
     }
@@ -72,41 +74,41 @@ struct DefaultsSettings {
     
     static var maleWinPlayerScore: Int? {
         get {
-            userDefaults.integer(forKey: Keys.maleScore.rawValue)
+            userDefaults.integer(forKey: Keys.maleWinScore.rawValue)
         }
         
         set {
-            userDefaults.setValue(newValue, forKey: Keys.maleScore.rawValue)
+            userDefaults.setValue(newValue, forKey: Keys.maleWinScore.rawValue)
         }
     }
     
     static var maleLoosePlayerScore: Int? {
         get {
-            userDefaults.integer(forKey: Keys.maleScore.rawValue)
+            userDefaults.integer(forKey: Keys.maleLoseScore.rawValue)
         }
         
         set {
-            userDefaults.setValue(newValue, forKey: Keys.maleScore.rawValue)
+            userDefaults.setValue(newValue, forKey: Keys.maleLoseScore.rawValue)
         }
     }
     
     static var femaleWinPlayerScore: Int? {
         get {
-            userDefaults.integer(forKey: Keys.femaleScore.rawValue)
+            userDefaults.integer(forKey: Keys.femaleWinScore.rawValue)
         }
         
         set {
-            userDefaults.setValue(newValue, forKey: Keys.femaleScore.rawValue)
+            userDefaults.setValue(newValue, forKey: Keys.femaleWinScore.rawValue)
         }
     }
     
     static var femaleLoosePlayerScore: Int? {
         get {
-            userDefaults.integer(forKey: Keys.femaleScore.rawValue)
+            userDefaults.integer(forKey: Keys.femaleLooseScore.rawValue)
         }
         
         set {
-            userDefaults.setValue(newValue, forKey: Keys.femaleScore.rawValue)
+            userDefaults.setValue(newValue, forKey: Keys.femaleLooseScore.rawValue)
         }
     }
     
