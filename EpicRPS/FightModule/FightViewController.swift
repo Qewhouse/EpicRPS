@@ -5,7 +5,6 @@
 //  Created by Станислав Артамонов on 10.06.24.
 //
 
-import Foundation
 import UIKit
 
 final class FightViewController: UIViewController {
@@ -49,7 +48,6 @@ final class FightViewController: UIViewController {
         func imageNameChoisenButton() -> String {
             self.rawValue + "_chosen"
         }
-        
     }
     
     // MARK: - Private Layout
@@ -217,7 +215,9 @@ private extension FightViewController {
             case .restart:
                 self.resetGame()
             case .goToHome:
-                break
+//                break
+                // added code for button action_Maxim -> pops to rootVC Main Screen
+                navigationController?.popToRootViewController(animated: true)
             }
         }))
         
@@ -373,6 +373,14 @@ private extension FightViewController {
         computerScore = 0
         updateScoreLabel()
         battleProgressView.setProgress(0.5, animated: true)
+        // added code for button action_Maxim -> hides pauseView and restarts the game
+        startTimer()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            self.pauseView.alpha = 0.0
+        }) { _ in
+            self.pauseView.isHidden = true
+        }
     }
     
     func animateHands() {
@@ -467,6 +475,7 @@ private extension FightViewController {
     func configureNavigationBar() {
         self.navigationItem.rightBarButtonItem = configureBarButtonItem()
         self.navigationItem.hidesBackButton = true
+        self.navigationController?.isNavigationBarHidden = false
         
     }
     
