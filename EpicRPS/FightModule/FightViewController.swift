@@ -4,7 +4,6 @@
 //
 //  Created by Станислав Артамонов on 10.06.24.
 //
-
 import UIKit
 
 final class FightViewController: UIViewController {
@@ -48,6 +47,7 @@ final class FightViewController: UIViewController {
         func imageNameChoisenButton() -> String {
             self.rawValue + "_chosen"
         }
+        
     }
     
     // MARK: - Private Layout
@@ -162,8 +162,13 @@ final class FightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        DefaultsSettings.roundTime = 30
         roundTime = DefaultsSettings.roundTime ?? Constants.roundTime
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.resetGame()
+        self.timerlProgressView.progress = Float(DefaultsSettings.roundTime!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -189,6 +194,8 @@ private extension FightViewController {
         bloodImageView.isHidden = true
     }
     
+    
+    
     func setupView() {
         view.addSubview(femaleHandImageView)
         view.addSubview(bloodImageView)
@@ -207,30 +214,30 @@ private extension FightViewController {
     }
     
     func cofigurePauseView() {
-        pauseView.configure(with: .init(maleScore: playerScore, femaleScore: computerScore, actionHandler: { [weak self] action in
-            guard let self = self else { return }
-            switch action {
-            case .play:
-                self.hidePauseView()
-            case .restart:
-                self.resetGame()
-            case .goToHome:
-//                break
-                // added code for button action_Maxim -> pops to rootVC Main Screen
-                navigationController?.popToRootViewController(animated: true)
-            }
-        }))
-        
+        configurePauseViewModel()
         pauseView.translatesAutoresizingMaskIntoConstraints = false
         pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         pauseView.alpha = 0
     }
     
+    func configurePauseViewModel() {
+        pauseView.configure(with: .init(maleScore: playerScore, femaleScore: computerScore, actionHandler: { [weak self] action in
+            guard let self = self else { return }
+            switch action {
+            case .play:
+                self.resumeGame()
+            case .restart:
+                self.restartInPauseView()
+            case .goToHome:
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }))
+    }
     func setBackground(imageName: String) {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: imageName)
         backgroundImage.contentMode = .scaleAspectFill
-        view.insertSubview(backgroundImage, at: 0) // Вставляем изображение на задний план
+        view.insertSubview(backgroundImage, at: 0)
         drowImageView.isHidden = true
     }
     
@@ -353,14 +360,8 @@ private extension FightViewController {
     func endGame() {
         timer?.invalidate()
         timer = nil
-        
+        updateTotalScore()
         let winner = playerScore > computerScore ? "Player" : "Computer"
-        //        let alert = UIAlertController(title: "Game Over", message: "\(winner) wins!", preferredStyle: .alert)
-        //        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-        //            self.resetGame()
-        //        }))
-        //
-        //        present(alert, animated: true, completion: nil)
         let winLooseVC = ResultsViewController()
         winLooseVC.leftScore = self.playerScore
         winLooseVC.rightScore = self.computerScore
@@ -368,19 +369,23 @@ private extension FightViewController {
         navigationController?.pushViewController(winLooseVC, animated: true)
     }
     
+    func updateTotalScore() {
+        if playerScore > computerScore {
+            DefaultsSettings.maleWinPlayerScore! += 1
+            DefaultsSettings.femaleLoosePlayerScore! += 1
+        } else {
+            DefaultsSettings.femaleWinPlayerScore! += 1
+            DefaultsSettings.maleLoosePlayerScore! += 1
+        }
+    }
+    
     func resetGame() {
+        timer?.invalidate()
+        timer = nil
         playerScore = 0
         computerScore = 0
         updateScoreLabel()
         battleProgressView.setProgress(0.5, animated: true)
-        // added code for button action_Maxim -> hides pauseView and restarts the game
-        startTimer()
-        UIView.animate(withDuration: 0.3, animations: {
-            self.pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-            self.pauseView.alpha = 0.0
-        }) { _ in
-            self.pauseView.isHidden = true
-        }
     }
     
     func animateHands() {
@@ -405,7 +410,9 @@ private extension FightViewController {
                     self.bloodImageView.alpha = 0.0
                 }) { _ in
                     self.bloodImageView.isHidden = true
-                    self.nextRound()
+                    if self.computerScore != 3 || self.playerScore != 3 {
+                        self.nextRound()
+                    }
                 }
             }
         }
@@ -475,8 +482,7 @@ private extension FightViewController {
     func configureNavigationBar() {
         self.navigationItem.rightBarButtonItem = configureBarButtonItem()
         self.navigationItem.hidesBackButton = true
-        self.navigationController?.isNavigationBarHidden = false
-        
+        navigationController?.isNavigationBarHidden = false
     }
     
     func configureBarButtonItem() -> UIBarButtonItem {
@@ -486,8 +492,8 @@ private extension FightViewController {
     }
     
     //MARK: - PasueView Show
-    
     func showPauseView() {
+        configurePauseViewModel()
         timer?.invalidate()
         pauseView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
@@ -497,7 +503,6 @@ private extension FightViewController {
     }
     
     func hidePauseView() {
-        startTimer()
         UIView.animate(withDuration: 0.3, animations: {
             self.pauseView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             self.pauseView.alpha = 0.0
@@ -505,10 +510,22 @@ private extension FightViewController {
             self.pauseView.isHidden = true
         }
     }
+    
+    func resumeGame() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        hidePauseView()
+    }
+    
+    func restartInPauseView() {
+        hidePauseView()
+        resetGame()
+    }
 }
 
 // MARK: - Setup Contraints
 private extension FightViewController {
+    
+    
     
     func setupConstraints() {
         

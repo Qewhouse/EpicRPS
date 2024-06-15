@@ -100,6 +100,9 @@ final class PauseView: UIView {
     
     func configure(with model: PauseModel) {
         self.viewModel = model
+        self.leftScore = model.femaleScore
+        self.rightScore = model.maleScore
+        resultLabel.text = "\(leftScore) - \(rightScore)"
     }
     
     override func layoutSubviews() {
