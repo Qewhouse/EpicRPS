@@ -18,7 +18,7 @@ final class ResultsViewController: UIViewController {
     private let computer = "Player 1"
     
     // MARK: - Background Configuration
-    private let winBackground = "background"
+    private let winBackground = "Background"
     private let looseBackground = "winBackground"
     
     // MARK: - Score Properties
