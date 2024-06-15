@@ -25,6 +25,7 @@
 		6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */; };
 		6E11177D2C17AF0F003CC000 /* DualPlayerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177C2C17AF0F003CC000 /* DualPlayerProgressView.swift */; };
 		6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177E2C18F7CD003CC000 /* PauseView.swift */; };
+		A7D09DA82C1AE9BE00CE1384 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D09DA72C1AE9BE00CE1384 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSettings.swift; sourceTree = "<group>"; };
 		6E11177C2C17AF0F003CC000 /* DualPlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualPlayerProgressView.swift; sourceTree = "<group>"; };
 		6E11177E2C18F7CD003CC000 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		A7D09DA72C1AE9BE00CE1384 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				37F16A452C1A010D00CC2C1A /* PreFightModule */,
 				37B7C2DE2C1CD89200D444FD /* ResultsModule */,
 				37F16A422C19ED9700CC2C1A /* RulesModule */,
+				A7D09DA92C1AE9DD00CE1384 /* SettingsModule */,
 				0B3F59002C1D8C5B003855AC /* SoundPlayer */,
 				6E0F33642C1DA96B0003FED3 /* FirstStartCheck */,
 				37637C992C161A4500B6B06E /* Resources */,
@@ -175,6 +178,12 @@
 			path = PreFightModule;
 			sourceTree = "<group>";
 		};
+		A7D09DA92C1AE9DD00CE1384 /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				A7D09DA72C1AE9BE00CE1384 /* SettingsViewController.swift */,
+			);
+			path = SettingsModule;
 		6E0F33642C1DA96B0003FED3 /* FirstStartCheck */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +267,7 @@
 			files = (
 				375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */,
 				6E1117772C179532003CC000 /* FightViewController.swift in Sources */,
+				A7D09DA82C1AE9BE00CE1384 /* SettingsViewController.swift in Sources */,
 				6E0F33662C1DA9910003FED3 /* FirstStartChekManager.swift in Sources */,
 				375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */,
 				6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */,
