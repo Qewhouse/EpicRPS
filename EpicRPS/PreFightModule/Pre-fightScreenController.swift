@@ -12,7 +12,7 @@ class Pre_fightScreen: UIViewController {
     // MARK: - UI Properties
     private lazy var player1: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage(named: "Player 1")
+        element.image = UIImage.player1
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -20,7 +20,7 @@ class Pre_fightScreen: UIViewController {
     
     private lazy var player2: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage(named: "Player 2")
+        element.image = UIImage.player2
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -28,7 +28,7 @@ class Pre_fightScreen: UIViewController {
     
     private let vsLabel: UILabel = {
         let element = UILabel()
-        element.textColor = UIColor(named: "labelColour")
+        element.textColor = UIColor(.labelColour)
         element.text = "VS"
         element.font = UIFont.boldSystemFont(ofSize: 60)
         element.contentMode = .scaleAspectFit
@@ -38,7 +38,7 @@ class Pre_fightScreen: UIViewController {
     
     private let getReadyLabel: UILabel = {
         let element = UILabel()
-        element.textColor = UIColor(named: "labelColour")
+        element.textColor = UIColor(.labelColour)
         element.text = "Get ready..."
         element.font = UIFont.boldSystemFont(ofSize: 19.5)
         element.contentMode = .scaleAspectFit
@@ -52,7 +52,7 @@ class Pre_fightScreen: UIViewController {
         element.backgroundColor = .clear
         element.text =
         """
-        10 Victories/
+        10 Victories /
             2 Lose
         """
         element.font = UIFont.boldSystemFont(ofSize: 19.5)
@@ -67,7 +67,7 @@ class Pre_fightScreen: UIViewController {
         element.backgroundColor = .clear
         element.text =
         """
-        23 Victories/
+        23 Victories /
              1 Lose
         """
         element.font = UIFont.boldSystemFont(ofSize: 19.5)
@@ -77,24 +77,32 @@ class Pre_fightScreen: UIViewController {
         return element
     }()
     
+    private lazy var backgroundImage: UIImageView = {
+        let element = UIImageView()
+        element.image = UIImage.background
+        element.contentMode = .scaleAspectFill
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
-        setBackground(imageName: "background")
         startGame()
     }
     
     // MARK: - Private Methods
     private func setupUI() {
+        view.addSubview(backgroundImage)
         view.addSubview(player1)
         view.addSubview(player2)
         view.addSubview(vsLabel)
         view.addSubview(getReadyLabel)
         view.addSubview(player1Stat)
         view.addSubview(player2Stat)
-        self.navigationItem.hidesBackButton = true
+        navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: - Private Selector Methods
@@ -107,16 +115,14 @@ class Pre_fightScreen: UIViewController {
 }
 
 // MARK: - Setup Constraints
-extension Pre_fightScreen{
-    func setBackground(imageName: String) {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "background")
-        backgroundImage.contentMode = .scaleAspectFill
-        view.insertSubview(backgroundImage, at: 0)
-    }
-    
-    private func setupConstraints() {
+private extension Pre_fightScreen{
+    func setupConstraints() {
         NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             vsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             vsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             

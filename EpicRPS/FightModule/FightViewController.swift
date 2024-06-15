@@ -549,11 +549,6 @@ private extension FightViewController {
             scissorsButton.heightAnchor.constraint(equalToConstant: Constants.buttonSize),
             scissorsButton.widthAnchor.constraint(equalToConstant: Constants.buttonSize),
 
-            pauseView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pauseView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            pauseView.widthAnchor.constraint(equalToConstant: Constants.pauseViewButtonWight),
-            pauseView.heightAnchor.constraint(equalToConstant: Constants.pauseViewButtonHeight),
-
             drowImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             drowImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             drowImageView.widthAnchor.constraint(equalToConstant:  Constants.fightDrawImageViewSizeWight),
