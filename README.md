@@ -1,8 +1,7 @@
 # DevRush Marathon XII Challenge #1 - Rock-Scissors-Paper
 ![GitHub repo size](https://img.shields.io/github/repo-size/Qewhouse/EpicRPS)  ![GitHub contributors](https://img.shields.io/github/contributors/Qewhouse/EpicRPS)   ![GitHub last commit](https://img.shields.io/github/last-commit/Qewhouse/EpicRPS) ![][ios] ![][swift] ![][uikit]
 
-
-add banner
+![](https://github.com/Qewhouse/EpicRPS/blob/develop/banner.gif)
 
 ---
 
@@ -33,7 +32,8 @@ add banner
 * UserDefaults
 
 ---
-add banner
+![Screenshot 2024-06-15 at 17 12 37](https://github.com/Qewhouse/EpicRPS/assets/31271156/b9a1d91a-1af9-4d97-b7f5-4e22c483be42)
+
 
 ---
 # Description of functionality:
