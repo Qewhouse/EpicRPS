@@ -8,6 +8,10 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    
+    // MARK: - SoundPlayer
+    private let sound = SoundPlayer.shared
+   
     //MARK: - Dependencies
     let fontSize: CGFloat = 20
     let offset: CGFloat = 60

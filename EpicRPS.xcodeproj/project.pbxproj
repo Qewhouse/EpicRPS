@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B3F59022C1D8C81003855AC /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F59012C1D8C81003855AC /* SoundManager.swift */; };
+		0B3F59192C1E3C98003855AC /* Мелодия1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B3F59162C1E3C97003855AC /* Мелодия1.wav */; };
+		0B3F591A2C1E3C98003855AC /* Мелодия2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B3F59172C1E3C97003855AC /* Мелодия2.wav */; };
+		0B3F591B2C1E3C98003855AC /* Мелодия3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B3F59182C1E3C98003855AC /* Мелодия3.wav */; };
 		375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF272C16127E00A8A6D0 /* AppDelegate.swift */; };
 		375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */; };
 		375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */; };
@@ -30,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		0B3F59012C1D8C81003855AC /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		0B3F59162C1E3C97003855AC /* Мелодия1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Мелодия1.wav"; path = "../../../../../../../Downloads/Мелодия1.wav"; sourceTree = "<group>"; };
+		0B3F59172C1E3C97003855AC /* Мелодия2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Мелодия2.wav"; path = "../../../../../../../Downloads/Мелодия2.wav"; sourceTree = "<group>"; };
+		0B3F59182C1E3C98003855AC /* Мелодия3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Мелодия3.wav"; path = "../../../../../../../Downloads/Мелодия3.wav"; sourceTree = "<group>"; };
 		375DFF242C16127E00A8A6D0 /* EpicRPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicRPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375DFF272C16127E00A8A6D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +80,9 @@
 		0B3F59032C1D8F0E003855AC /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				0B3F59162C1E3C97003855AC /* Мелодия1.wav */,
+				0B3F59172C1E3C97003855AC /* Мелодия2.wav */,
+				0B3F59182C1E3C98003855AC /* Мелодия3.wav */,
 				37B7C2F62C1DED9000D444FD /* handSelection.wav */,
 				37B7C2F42C1DED9000D444FD /* handStrike.wav */,
 				37B7C2F52C1DED9000D444FD /* winApplause.wav */,
@@ -252,8 +261,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B3F591B2C1E3C98003855AC /* Мелодия3.wav in Resources */,
 				375DFF312C16128000A8A6D0 /* Assets.xcassets in Resources */,
 				375DFF342C16128000A8A6D0 /* Base in Resources */,
+				0B3F591A2C1E3C98003855AC /* Мелодия2.wav in Resources */,
+				0B3F59192C1E3C98003855AC /* Мелодия1.wav in Resources */,
 				37B7C2F82C1DED9000D444FD /* winApplause.wav in Resources */,
 				37B7C2F92C1DED9000D444FD /* handSelection.wav in Resources */,
 				37B7C2F72C1DED9000D444FD /* handStrike.wav in Resources */,

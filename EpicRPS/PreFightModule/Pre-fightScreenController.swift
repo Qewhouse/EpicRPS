@@ -12,15 +12,15 @@ class Pre_fightScreen: UIViewController {
     private let sound = SoundPlayer.shared
     
     //MARK: - Dependencies
-    var player1winStat: Int = DefaultsSettings.maleWinPlayerScore!
-    var player1looseStat: Int = DefaultsSettings.maleLoosePlayerScore!
-    var player2winStat: Int = DefaultsSettings.femaleWinPlayerScore!
-    var player2looseStat: Int = DefaultsSettings.femaleLoosePlayerScore!
+    var player1winStat: Int = DefaultsSettings.maleWinPlayerScore ?? 0
+    var player1looseStat: Int = DefaultsSettings.maleLoosePlayerScore ?? 0
+    var player2winStat: Int = DefaultsSettings.femaleWinPlayerScore ?? 0
+    var player2looseStat: Int = DefaultsSettings.femaleLoosePlayerScore ?? 0
     
     // MARK: - UI Properties
     private lazy var player1: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage.player1
+        element.image = UIImage.play1
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -28,7 +28,7 @@ class Pre_fightScreen: UIViewController {
     
     private lazy var player2: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage.player2
+        element.image = UIImage.play2
         element.contentMode = .scaleAspectFit
         element.translatesAutoresizingMaskIntoConstraints = false
         return element

@@ -7,7 +7,8 @@
 import UIKit
 
 final class FightViewController: UIViewController {
-    // SoundPlayer
+    
+    // MARK: - SoundPlayer
     private let sound = SoundPlayer.shared
     
     // MARK: - Enum
@@ -172,11 +173,17 @@ final class FightViewController: UIViewController {
         self.timerlProgressView.progress = Float(DefaultsSettings.roundTime!)
         loadRoundTime()
         navigationController?.isNavigationBarHidden = false
+        sound.playBackground(.init(rawValue: DefaultsSettings.defaultFonMusicName ?? "") ?? .fonMusic1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startTimerAndHideFight()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sound.stop()
     }
 }
 
@@ -358,8 +365,6 @@ private extension FightViewController {
         timer = nil
         updateTotalScore()
         let winner = playerScore > computerScore ? "Player" : "Computer"
-        sound.play(.winApplause)
-
         let winLooseVC = ResultsViewController()
         winLooseVC.leftScore = self.playerScore
         winLooseVC.rightScore = self.computerScore
@@ -492,7 +497,7 @@ private extension FightViewController {
         return navigationItem
     }
     
-    //MARK: - PasueView Show
+    //MARK: - PauseView Show
     func showPauseView() {
         configurePauseViewModel()
         timer?.invalidate()
