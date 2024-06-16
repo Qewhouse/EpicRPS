@@ -7,14 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3F59022C1D8C81003855AC /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3F59012C1D8C81003855AC /* SoundManager.swift */; };
+		370CA6E72C1ED5DA007B759B /* Мелодия3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 370CA6E32C1ED5D9007B759B /* Мелодия3.wav */; };
+		370CA6E82C1ED5DA007B759B /* Мелодия2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 370CA6E42C1ED5DA007B759B /* Мелодия2.wav */; };
+		370CA6E92C1ED5DA007B759B /* Мелодия1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 370CA6E52C1ED5DA007B759B /* Мелодия1.wav */; };
+		370CA6EA2C1ED5DA007B759B /* youLost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 370CA6E62C1ED5DA007B759B /* youLost.wav */; };
 		375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF272C16127E00A8A6D0 /* AppDelegate.swift */; };
 		375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */; };
 		375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */; };
 		375DFF312C16128000A8A6D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 375DFF302C16128000A8A6D0 /* Assets.xcassets */; };
 		375DFF342C16128000A8A6D0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 375DFF332C16128000A8A6D0 /* Base */; };
+		37B7C2E12C1CD9F700D444FD /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7C2E02C1CD9F700D444FD /* ResultsViewController.swift */; };
+		37B7C2F72C1DED9000D444FD /* handStrike.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7C2F42C1DED9000D444FD /* handStrike.wav */; };
+		37B7C2F82C1DED9000D444FD /* winApplause.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7C2F52C1DED9000D444FD /* winApplause.wav */; };
+		37B7C2F92C1DED9000D444FD /* handSelection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37B7C2F62C1DED9000D444FD /* handSelection.wav */; };
+		37B7C2FB2C1DEDA100D444FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B7C2FA2C1DEDA100D444FD /* SettingsViewController.swift */; };
+		37F16A402C19ED9100CC2C1A /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */; };
+		37F16A442C1A010800CC2C1A /* Pre-fightScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F16A432C1A010800CC2C1A /* Pre-fightScreenController.swift */; };
+		6E0F33662C1DA9910003FED3 /* FirstStartChekManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F33652C1DA9910003FED3 /* FirstStartChekManager.swift */; };
+		6E1117772C179532003CC000 /* FightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1117762C179532003CC000 /* FightViewController.swift */; };
+		6E1117792C179C1D003CC000 /* VerticalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1117782C179C1D003CC000 /* VerticalProgressView.swift */; };
+		6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */; };
+		6E11177D2C17AF0F003CC000 /* DualPlayerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177C2C17AF0F003CC000 /* DualPlayerProgressView.swift */; };
+		6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11177E2C18F7CD003CC000 /* PauseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B3F59012C1D8C81003855AC /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		370CA6E32C1ED5D9007B759B /* Мелодия3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Мелодия3.wav"; sourceTree = "<group>"; };
+		370CA6E42C1ED5DA007B759B /* Мелодия2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Мелодия2.wav"; sourceTree = "<group>"; };
+		370CA6E52C1ED5DA007B759B /* Мелодия1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Мелодия1.wav"; sourceTree = "<group>"; };
+		370CA6E62C1ED5DA007B759B /* youLost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = youLost.wav; sourceTree = "<group>"; };
 		375DFF242C16127E00A8A6D0 /* EpicRPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicRPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375DFF272C16127E00A8A6D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		375DFF292C16127E00A8A6D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +45,19 @@
 		375DFF302C16128000A8A6D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		375DFF332C16128000A8A6D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		375DFF352C16128000A8A6D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37B7C2E02C1CD9F700D444FD /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		37B7C2F42C1DED9000D444FD /* handStrike.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = handStrike.wav; sourceTree = "<group>"; };
+		37B7C2F52C1DED9000D444FD /* winApplause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = winApplause.wav; sourceTree = "<group>"; };
+		37B7C2F62C1DED9000D444FD /* handSelection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = handSelection.wav; sourceTree = "<group>"; };
+		37B7C2FA2C1DEDA100D444FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		37F16A432C1A010800CC2C1A /* Pre-fightScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pre-fightScreenController.swift"; sourceTree = "<group>"; };
+		6E0F33652C1DA9910003FED3 /* FirstStartChekManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStartChekManager.swift; sourceTree = "<group>"; };
+		6E1117762C179532003CC000 /* FightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightViewController.swift; sourceTree = "<group>"; };
+		6E1117782C179C1D003CC000 /* VerticalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalProgressView.swift; sourceTree = "<group>"; };
+		6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSettings.swift; sourceTree = "<group>"; };
+		6E11177C2C17AF0F003CC000 /* DualPlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualPlayerProgressView.swift; sourceTree = "<group>"; };
+		6E11177E2C18F7CD003CC000 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +71,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B3F59002C1D8C5B003855AC /* SoundPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				0B3F59012C1D8C81003855AC /* SoundManager.swift */,
+			);
+			path = SoundPlayer;
+			sourceTree = "<group>";
+		};
+		0B3F59032C1D8F0E003855AC /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				370CA6E62C1ED5DA007B759B /* youLost.wav */,
+				370CA6E52C1ED5DA007B759B /* Мелодия1.wav */,
+				370CA6E42C1ED5DA007B759B /* Мелодия2.wav */,
+				370CA6E32C1ED5D9007B759B /* Мелодия3.wav */,
+				37B7C2F62C1DED9000D444FD /* handSelection.wav */,
+				37B7C2F42C1DED9000D444FD /* handStrike.wav */,
+				37B7C2F52C1DED9000D444FD /* winApplause.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		375DFF1B2C16127E00A8A6D0 = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +113,14 @@
 			isa = PBXGroup;
 			children = (
 				375DFF3B2C1613EA00A8A6D0 /* App */,
-				375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */,
+				37F16A3C2C19EADB00CC2C1A /* MainScreenModule */,
+				37F16A3D2C19EB1600CC2C1A /* FightModule */,
+				37F16A452C1A010D00CC2C1A /* PreFightModule */,
+				37B7C2DE2C1CD89200D444FD /* ResultsModule */,
+				37F16A422C19ED9700CC2C1A /* RulesModule */,
+				0B3F59002C1D8C5B003855AC /* SoundPlayer */,
+				6E0F33642C1DA96B0003FED3 /* FirstStartCheck */,
+				37B7C2FC2C1DEDA400D444FD /* SettingsModule */,
 				37637C992C161A4500B6B06E /* Resources */,
 			);
 			path = EpicRPS;
@@ -74,10 +139,71 @@
 		37637C992C161A4500B6B06E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B3F59032C1D8F0E003855AC /* Sounds */,
 				375DFF302C16128000A8A6D0 /* Assets.xcassets */,
 				375DFF322C16128000A8A6D0 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		37B7C2DE2C1CD89200D444FD /* ResultsModule */ = {
+			isa = PBXGroup;
+			children = (
+				37B7C2E02C1CD9F700D444FD /* ResultsViewController.swift */,
+			);
+			path = ResultsModule;
+			sourceTree = "<group>";
+		};
+		37B7C2FC2C1DEDA400D444FD /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				37B7C2FA2C1DEDA100D444FD /* SettingsViewController.swift */,
+			);
+			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		37F16A3C2C19EADB00CC2C1A /* MainScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				375DFF2B2C16127E00A8A6D0 /* MainViewController.swift */,
+			);
+			path = MainScreenModule;
+			sourceTree = "<group>";
+		};
+		37F16A3D2C19EB1600CC2C1A /* FightModule */ = {
+			isa = PBXGroup;
+			children = (
+				6E1117762C179532003CC000 /* FightViewController.swift */,
+				6E1117782C179C1D003CC000 /* VerticalProgressView.swift */,
+				6E11177C2C17AF0F003CC000 /* DualPlayerProgressView.swift */,
+				6E11177E2C18F7CD003CC000 /* PauseView.swift */,
+				6E11177A2C17AC20003CC000 /* DefaultsSettings.swift */,
+			);
+			path = FightModule;
+			sourceTree = "<group>";
+		};
+		37F16A422C19ED9700CC2C1A /* RulesModule */ = {
+			isa = PBXGroup;
+			children = (
+				37F16A3E2C19ED9100CC2C1A /* RulesViewController.swift */,
+			);
+			path = RulesModule;
+			sourceTree = "<group>";
+		};
+		37F16A452C1A010D00CC2C1A /* PreFightModule */ = {
+			isa = PBXGroup;
+			children = (
+				37F16A432C1A010800CC2C1A /* Pre-fightScreenController.swift */,
+			);
+			path = PreFightModule;
+			sourceTree = "<group>";
+		};
+		6E0F33642C1DA96B0003FED3 /* FirstStartCheck */ = {
+			isa = PBXGroup;
+			children = (
+				6E0F33652C1DA9910003FED3 /* FirstStartChekManager.swift */,
+			);
+			path = FirstStartCheck;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +265,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				375DFF312C16128000A8A6D0 /* Assets.xcassets in Resources */,
+				370CA6E72C1ED5DA007B759B /* Мелодия3.wav in Resources */,
 				375DFF342C16128000A8A6D0 /* Base in Resources */,
+				370CA6E82C1ED5DA007B759B /* Мелодия2.wav in Resources */,
+				370CA6EA2C1ED5DA007B759B /* youLost.wav in Resources */,
+				37B7C2F82C1DED9000D444FD /* winApplause.wav in Resources */,
+				37B7C2F92C1DED9000D444FD /* handSelection.wav in Resources */,
+				37B7C2F72C1DED9000D444FD /* handStrike.wav in Resources */,
+				370CA6E92C1ED5DA007B759B /* Мелодия1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +284,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				375DFF2C2C16127E00A8A6D0 /* MainViewController.swift in Sources */,
+				6E1117772C179532003CC000 /* FightViewController.swift in Sources */,
+				6E0F33662C1DA9910003FED3 /* FirstStartChekManager.swift in Sources */,
 				375DFF282C16127E00A8A6D0 /* AppDelegate.swift in Sources */,
+				6E11177F2C18F7CD003CC000 /* PauseView.swift in Sources */,
+				37B7C2E12C1CD9F700D444FD /* ResultsViewController.swift in Sources */,
+				37F16A442C1A010800CC2C1A /* Pre-fightScreenController.swift in Sources */,
+				37F16A402C19ED9100CC2C1A /* RulesViewController.swift in Sources */,
+				6E11177D2C17AF0F003CC000 /* DualPlayerProgressView.swift in Sources */,
+				37B7C2FB2C1DEDA100D444FD /* SettingsViewController.swift in Sources */,
 				375DFF2A2C16127E00A8A6D0 /* SceneDelegate.swift in Sources */,
+				6E1117792C179C1D003CC000 /* VerticalProgressView.swift in Sources */,
+				0B3F59022C1D8C81003855AC /* SoundManager.swift in Sources */,
+				6E11177B2C17AC20003CC000 /* DefaultsSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -279,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -304,6 +448,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -336,6 +481,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
