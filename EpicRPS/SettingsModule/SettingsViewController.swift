@@ -51,7 +51,7 @@ final class SettingsViewController: UIViewController, UIPickerViewDataSource, UI
         return playWithFriendsSwitch
     }()
     
-    private let musicOptions = ["Мелодия 1", "Мелодия 2", "Мелодия 3"] // добавить звуки и переименовать
+    private let musicOptions = ["Мелодия1", "Мелодия2", "Мелодия3"] // добавить звуки и переименовать
     private let variantTime = [30, 60]
     
     // MARK: - View Lifecycle

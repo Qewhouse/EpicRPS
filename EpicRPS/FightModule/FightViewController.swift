@@ -9,6 +9,9 @@ import AVFoundation
 
 final class FightViewController: UIViewController {
     
+    // MARK: - SoundPlayer
+    private let sound = SoundPlayer.shared
+    
     // MARK: - Enum
     private enum Constants {
         static let roundTime: Int = 30
@@ -171,11 +174,17 @@ final class FightViewController: UIViewController {
         self.timerlProgressView.progress = Float(DefaultsSettings.roundTime!)
         loadRoundTime()
         navigationController?.isNavigationBarHidden = false
+        sound.playBackground(.init(rawValue: DefaultsSettings.defaultFonMusicName ?? "") ?? .fonMusic1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startTimerAndHideFight()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sound.stop()
     }
 }
 
@@ -321,6 +330,7 @@ private extension FightViewController {
     private func playerChose(_ choice: VariantHand) {
         let computerChoice = VariantHand.random()
         selectedButton(choice)
+        sound.play(.handSelection)
         timer?.invalidate()
         maleHandImageView.image = UIImage(named: choice.imageName(for: "male"))
         femaleHandImageView.image = UIImage(named: computerChoice.imageName(for: "female"))
@@ -395,6 +405,7 @@ private extension FightViewController {
             
             self.bloodImageView.isHidden = false
             self.bloodImageView.alpha = 1.0
+            self.sound.play(.handStrike)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -487,7 +498,7 @@ private extension FightViewController {
         return navigationItem
     }
     
-    //MARK: - PasueView Show
+    //MARK: - PauseView Show
     func showPauseView() {
         configurePauseViewModel()
         timer?.invalidate()
