@@ -14,6 +14,7 @@ enum Audio: String {
     case fonMusic1 = "Мелодия1"
     case fonMusic2 = "Мелодия2"
     case fonMusic3 = "Мелодия3"
+    case youLost = "youLost"
 
     
     var filePath: URL {
