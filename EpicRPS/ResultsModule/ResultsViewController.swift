@@ -8,6 +8,8 @@
 import UIKit
 
 final class ResultsViewController: UIViewController {
+    
+    private let sound = SoundPlayer.shared
 
     // MARK: - Properties
     private let winResult = "You Win"
@@ -99,6 +101,11 @@ final class ResultsViewController: UIViewController {
         setupUI()
         setupConstraints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        outcome ? sound.play(.winApplause) : sound.play(.youLost)
+    }
 
     
     // MARK: - Private Methods
@@ -116,7 +123,6 @@ final class ResultsViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
     }
-    
     
     // MARK: - Update UI
     private func updateScoreLabel() {
